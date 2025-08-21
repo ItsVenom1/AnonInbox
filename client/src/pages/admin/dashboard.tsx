@@ -324,15 +324,106 @@ export default function AdminDashboard() {
           </TabsContent>
 
           <TabsContent value="settings">
-            <Card className="bg-black/30 border-gray-800/50 backdrop-blur-sm">
-              <CardHeader>
-                <CardTitle>System Settings</CardTitle>
-                <CardDescription>Configure system settings and security options</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-400">Settings panel coming soon...</p>
-              </CardContent>
-            </Card>
+            <div className="space-y-6">
+              {/* Security Settings */}
+              <Card className="bg-black/30 border-gray-800/50 backdrop-blur-sm">
+                <CardHeader>
+                  <CardTitle className="flex items-center space-x-2">
+                    <Shield className="w-5 h-5 text-nord-green" />
+                    <span>Security Settings</span>
+                  </CardTitle>
+                  <CardDescription>Configure security options and authentication</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                  {/* Admin Credentials */}
+                  <div className="space-y-4">
+                    <h4 className="text-sm font-semibold text-white">Admin Credentials</h4>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-sm text-gray-400 mb-2">Admin Username</label>
+                        <input 
+                          type="text" 
+                          defaultValue="admin"
+                          className="w-full bg-gray-800/50 border border-gray-700 rounded-lg px-3 py-2 text-white placeholder-gray-400 focus:border-nord-green"
+                          placeholder="Enter admin username"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm text-gray-400 mb-2">Admin Password</label>
+                        <input 
+                          type="password" 
+                          defaultValue="nordmail2024"
+                          className="w-full bg-gray-800/50 border border-gray-700 rounded-lg px-3 py-2 text-white placeholder-gray-400 focus:border-nord-green"
+                          placeholder="Enter admin password"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* reCAPTCHA Settings */}
+                  <div className="border-t border-gray-700 pt-6 space-y-4">
+                    <h4 className="text-sm font-semibold text-white">Cloudflare reCAPTCHA</h4>
+                    <p className="text-xs text-gray-400">Add reCAPTCHA protection to the admin login form</p>
+                    
+                    <div className="grid grid-cols-1 gap-4">
+                      <div>
+                        <label className="block text-sm text-gray-400 mb-2">Site Key</label>
+                        <input 
+                          type="text" 
+                          className="w-full bg-gray-800/50 border border-gray-700 rounded-lg px-3 py-2 text-white placeholder-gray-400 focus:border-nord-green"
+                          placeholder="Enter your Cloudflare reCAPTCHA site key"
+                        />
+                        <p className="text-xs text-gray-500 mt-1">Get this from your Cloudflare dashboard</p>
+                      </div>
+                      <div>
+                        <label className="block text-sm text-gray-400 mb-2">Secret Key</label>
+                        <input 
+                          type="password" 
+                          className="w-full bg-gray-800/50 border border-gray-700 rounded-lg px-3 py-2 text-white placeholder-gray-400 focus:border-nord-green"
+                          placeholder="Enter your Cloudflare reCAPTCHA secret key"
+                        />
+                        <p className="text-xs text-gray-500 mt-1">This will be stored securely on the server</p>
+                      </div>
+                      <div className="flex items-center space-x-3">
+                        <input 
+                          type="checkbox" 
+                          id="recaptcha-enabled"
+                          className="w-4 h-4 text-nord-green bg-gray-800 border-gray-700 rounded focus:ring-nord-green"
+                        />
+                        <label htmlFor="recaptcha-enabled" className="text-sm text-gray-300">
+                          Enable reCAPTCHA for admin login
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Save Button */}
+                  <div className="border-t border-gray-700 pt-6">
+                    <Button className="bg-nord-green text-black hover:bg-nord-green/90 font-medium">
+                      <Settings className="w-4 h-4 mr-2" />
+                      Save Security Settings
+                    </Button>
+                    <p className="text-xs text-gray-500 mt-2">
+                      ⚠️ Changes will require admin re-authentication
+                    </p>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* System Configuration */}
+              <Card className="bg-black/30 border-gray-800/50 backdrop-blur-sm">
+                <CardHeader>
+                  <CardTitle className="flex items-center space-x-2">
+                    <Server className="w-5 h-5 text-nord-green" />
+                    <span>System Configuration</span>
+                  </CardTitle>
+                  <CardDescription>Configure system-wide settings and preferences</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-400">Additional system settings coming soon...</p>
+                </CardContent>
+              </Card>
+            </div>
           </TabsContent>
         </Tabs>
       </div>

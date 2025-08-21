@@ -17,7 +17,9 @@ function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
-      <Route path="/:lang" component={Home} />
+      <Route path="/nordmail-admin" component={AdminLogin} />
+      <Route path="/nordmail-admin/login" component={AdminLogin} />
+      <Route path="/nordmail-admin/dashboard" component={AdminDashboard} />
       <Route path="/dashboard/:accountId" component={Dashboard} />
       <Route path="/:lang/dashboard/:accountId" component={Dashboard} />
       <Route path="/privacy" component={Privacy} />
@@ -26,9 +28,7 @@ function Router() {
       <Route path="/:lang/terms" component={Terms} />
       <Route path="/disclaimer" component={Disclaimer} />
       <Route path="/:lang/disclaimer" component={Disclaimer} />
-      <Route path="/nordmail-admin" component={AdminLogin} />
-      <Route path="/nordmail-admin/login" component={AdminLogin} />
-      <Route path="/nordmail-admin/dashboard" component={AdminDashboard} />
+      <Route path="/:lang" component={Home} />
       <Route component={NotFound} />
     </Switch>
   );

@@ -153,6 +153,16 @@ export default function AdminLogin() {
             </p>
           </div>
 
+          {/* Admin Credentials */}
+          <div className="mt-6 p-4 bg-gray-900/30 border border-gray-700/50 rounded-lg">
+            <h4 className="text-sm font-semibold text-nord-green mb-2">Default Admin Credentials:</h4>
+            <div className="text-xs text-gray-300 space-y-1">
+              <p><span className="text-gray-500">Username:</span> admin</p>
+              <p><span className="text-gray-500">Password:</span> nordmail2024</p>
+            </div>
+            <p className="text-xs text-yellow-200 mt-2">💡 Change these credentials in Settings after login</p>
+          </div>
+
           {/* Back to Home */}
           <div className="mt-4 text-center">
             <Button
