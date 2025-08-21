@@ -401,11 +401,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const { username, password } = req.body;
       
-      // Simple admin authentication - in production, use proper hashing
-      const adminUsername = process.env.ADMIN_USERNAME || 'admin';
-      const adminPassword = process.env.ADMIN_PASSWORD || 'nordmail2024';
+      // Check if custom settings exist, otherwise use defaults
+      const settings = (global as any).adminSettings || {
+        username: process.env.ADMIN_USERNAME || 'admin',
+        password: process.env.ADMIN_PASSWORD || 'nordmail2024'
+      };
       
-      if (username !== adminUsername || password !== adminPassword) {
+      if (username !== settings.username || password !== settings.password) {
         return res.status(401).json({ error: 'Invalid admin credentials' });
       }
       
@@ -487,6 +489,66 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error('Admin activity error:', error);
       res.json([]); // Return empty array if queries fail
+    }
+  });
+
+  // Update admin settings
+  app.post('/api/admin/settings', async (req, res) => {
+    try {
+      const authHeader = req.headers.authorization;
+      if (!authHeader || !authHeader.startsWith('Bearer ')) {
+        return res.status(401).json({ error: 'Authentication required' });
+      }
+
+      const { adminUsername, adminPassword, recaptchaSiteKey, recaptchaSecretKey, recaptchaEnabled } = req.body;
+      
+      if (!adminUsername || !adminPassword) {
+        return res.status(400).json({ error: 'Username and password are required' });
+      }
+
+      // In a real app, you'd update environment variables or database
+      // For now, we'll store in memory (this resets on server restart)
+      (global as any).adminSettings = {
+        username: adminUsername,
+        password: adminPassword,
+        recaptchaSiteKey: recaptchaSiteKey || null,
+        recaptchaSecretKey: recaptchaSecretKey || null,
+        recaptchaEnabled: Boolean(recaptchaEnabled)
+      };
+
+      res.json({ 
+        success: true, 
+        message: 'Admin settings updated successfully. Please log in again with new credentials.' 
+      });
+    } catch (error) {
+      console.error('Admin settings update error:', error);
+      res.status(500).json({ error: 'Failed to update admin settings' });
+    }
+  });
+
+  // Get admin settings (without sensitive data)
+  app.get('/api/admin/settings', async (req, res) => {
+    try {
+      const authHeader = req.headers.authorization;
+      if (!authHeader || !authHeader.startsWith('Bearer ')) {
+        return res.status(401).json({ error: 'Authentication required' });
+      }
+
+      const settings = (global as any).adminSettings || {
+        username: process.env.ADMIN_USERNAME || 'admin',
+        recaptchaSiteKey: null,
+        recaptchaEnabled: false
+      };
+
+      // Don't send password or secret key
+      res.json({
+        username: settings.username,
+        recaptchaSiteKey: settings.recaptchaSiteKey,
+        recaptchaEnabled: settings.recaptchaEnabled
+      });
+    } catch (error) {
+      console.error('Admin settings fetch error:', error);
+      res.status(500).json({ error: 'Failed to fetch admin settings' });
     }
   });
 
