@@ -1,4 +1,17 @@
-import { type TempAccount, type InsertTempAccount, type EmailAddress, type InsertEmailAddress, type Message, type InsertMessage } from "@shared/schema";
+import { 
+  type TempAccount, 
+  type InsertTempAccount, 
+  type EmailAddress, 
+  type InsertEmailAddress, 
+  type Message, 
+  type InsertMessage,
+  type BlogPost,
+  type InsertBlogPost,
+  type BlogCategory,
+  type InsertBlogCategory,
+  type BackupConfig,
+  type InsertBackupConfig
+} from "@shared/schema";
 import { randomUUID } from "crypto";
 
 export interface IStorage {
@@ -23,6 +36,33 @@ export interface IStorage {
   getRecentMessages(limit: number): Promise<Message[]>;
   getRecentEmails(limit: number): Promise<EmailAddress[]>;
   getRecentAccounts(limit: number): Promise<TempAccount[]>;
+  
+  // Blog Management
+  createBlogPost(data: InsertBlogPost): Promise<BlogPost>;
+  getBlogPosts(filters?: { status?: string; limit?: number; offset?: number }): Promise<BlogPost[]>;
+  getBlogPost(id: string): Promise<BlogPost | null>;
+  updateBlogPost(id: string, data: Partial<InsertBlogPost>): Promise<BlogPost>;
+  deleteBlogPost(id: string): Promise<void>;
+  
+  createBlogCategory(data: InsertBlogCategory): Promise<BlogCategory>;
+  getBlogCategories(): Promise<BlogCategory[]>;
+  deleteBlogCategory(id: string): Promise<void>;
+
+  // Backup Management
+  createBackupConfig(data: InsertBackupConfig): Promise<BackupConfig>;
+  getBackupConfigs(): Promise<BackupConfig[]>;
+  updateBackupConfig(id: string, data: Partial<InsertBackupConfig>): Promise<BackupConfig>;
+  deleteBackupConfig(id: string): Promise<void>;
+  performBackup(configId: string): Promise<{ success: boolean; message: string; backupId?: string }>;
+  getBackupHistory(limit?: number): Promise<Array<{
+    id: string;
+    configId: string;
+    status: 'success' | 'failed';
+    filename: string;
+    size: number;
+    createdAt: Date;
+    error?: string;
+  }>>;
 }
 
 export class MemStorage implements IStorage {
@@ -179,6 +219,180 @@ export class MemStorage implements IStorage {
     return Array.from(this.accounts.values())
       .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
       .slice(0, limit);
+  }
+
+  // Blog Management (Memory storage - will be replaced with DB)
+  private blogPosts: Map<string, BlogPost> = new Map();
+  private blogCategories: Map<string, BlogCategory> = new Map();
+  private backupConfigs: Map<string, BackupConfig> = new Map();
+
+  async createBlogPost(data: InsertBlogPost): Promise<BlogPost> {
+    const id = randomUUID();
+    const blogPost: BlogPost = {
+      id,
+      title: data.title,
+      slug: data.slug,
+      content: data.content,
+      excerpt: data.excerpt || null,
+      featuredImage: data.featuredImage || null,
+      status: data.status || 'draft',
+      author: data.author,
+      tags: data.tags ? [...data.tags] : null,
+      metaTitle: data.metaTitle || null,
+      metaDescription: data.metaDescription || null,
+      publishedAt: data.publishedAt || null,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    };
+    this.blogPosts.set(id, blogPost);
+    return blogPost;
+  }
+
+  async getBlogPosts(filters?: { status?: string; limit?: number; offset?: number }): Promise<BlogPost[]> {
+    let posts = Array.from(this.blogPosts.values());
+    
+    if (filters?.status) {
+      posts = posts.filter(post => post.status === filters.status);
+    }
+    
+    posts.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
+    
+    if (filters?.offset) {
+      posts = posts.slice(filters.offset);
+    }
+    
+    if (filters?.limit) {
+      posts = posts.slice(0, filters.limit);
+    }
+    
+    return posts;
+  }
+
+  async getBlogPost(id: string): Promise<BlogPost | null> {
+    return this.blogPosts.get(id) || null;
+  }
+
+  async updateBlogPost(id: string, data: Partial<InsertBlogPost>): Promise<BlogPost> {
+    const post = this.blogPosts.get(id);
+    if (!post) {
+      throw new Error('Blog post not found');
+    }
+    
+    const updatedPost: BlogPost = { 
+      ...post,
+      title: data.title !== undefined ? data.title : post.title,
+      slug: data.slug !== undefined ? data.slug : post.slug,
+      content: data.content !== undefined ? data.content : post.content,
+      excerpt: data.excerpt !== undefined ? data.excerpt : post.excerpt,
+      featuredImage: data.featuredImage !== undefined ? data.featuredImage : post.featuredImage,
+      status: data.status !== undefined ? data.status : post.status,
+      author: data.author !== undefined ? data.author : post.author,
+      tags: data.tags !== undefined ? (data.tags ? [...data.tags] : null) : post.tags,
+      metaTitle: data.metaTitle !== undefined ? data.metaTitle : post.metaTitle,
+      metaDescription: data.metaDescription !== undefined ? data.metaDescription : post.metaDescription,
+      publishedAt: data.publishedAt !== undefined ? data.publishedAt : post.publishedAt,
+      updatedAt: new Date() 
+    };
+    this.blogPosts.set(id, updatedPost);
+    return updatedPost;
+  }
+
+  async deleteBlogPost(id: string): Promise<void> {
+    this.blogPosts.delete(id);
+  }
+
+  async createBlogCategory(data: InsertBlogCategory): Promise<BlogCategory> {
+    const id = randomUUID();
+    const category: BlogCategory = {
+      id,
+      name: data.name,
+      slug: data.slug,
+      description: data.description || null,
+      createdAt: new Date(),
+    };
+    this.blogCategories.set(id, category);
+    return category;
+  }
+
+  async getBlogCategories(): Promise<BlogCategory[]> {
+    return Array.from(this.blogCategories.values())
+      .sort((a, b) => a.name.localeCompare(b.name));
+  }
+
+  async deleteBlogCategory(id: string): Promise<void> {
+    this.blogCategories.delete(id);
+  }
+
+  async createBackupConfig(data: InsertBackupConfig): Promise<BackupConfig> {
+    const id = randomUUID();
+    const config: BackupConfig = {
+      id,
+      provider: data.provider,
+      accessKey: data.accessKey || null,
+      secretKey: data.secretKey || null,
+      bucketName: data.bucketName || null,
+      region: data.region || null,
+      frequency: data.frequency || 'daily',
+      retention: data.retention,
+      isActive: data.isActive !== undefined ? data.isActive : true,
+      lastBackup: null,
+      createdAt: new Date(),
+    };
+    this.backupConfigs.set(id, config);
+    return config;
+  }
+
+  async getBackupConfigs(): Promise<BackupConfig[]> {
+    return Array.from(this.backupConfigs.values())
+      .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
+  }
+
+  async updateBackupConfig(id: string, data: Partial<InsertBackupConfig>): Promise<BackupConfig> {
+    const config = this.backupConfigs.get(id);
+    if (!config) {
+      throw new Error('Backup config not found');
+    }
+    
+    const updatedConfig = { ...config, ...data };
+    this.backupConfigs.set(id, updatedConfig);
+    return updatedConfig;
+  }
+
+  async deleteBackupConfig(id: string): Promise<void> {
+    this.backupConfigs.delete(id);
+  }
+
+  async performBackup(configId: string): Promise<{ success: boolean; message: string; backupId?: string }> {
+    // This is a mock implementation - will be replaced with real backup logic
+    const config = this.backupConfigs.get(configId);
+    if (!config) {
+      return { success: false, message: 'Backup config not found' };
+    }
+    
+    const backupId = randomUUID();
+    
+    // Update last backup time
+    config.lastBackup = new Date();
+    this.backupConfigs.set(configId, config);
+    
+    return { 
+      success: true, 
+      message: 'Backup completed successfully', 
+      backupId 
+    };
+  }
+
+  async getBackupHistory(limit = 10): Promise<Array<{
+    id: string;
+    configId: string;
+    status: 'success' | 'failed';
+    filename: string;
+    size: number;
+    createdAt: Date;
+    error?: string;
+  }>> {
+    // Mock backup history - will be replaced with real data
+    return [];
   }
 }
 

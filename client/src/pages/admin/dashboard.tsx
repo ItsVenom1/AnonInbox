@@ -16,7 +16,10 @@ import {
   MessageCircle,
   Activity,
   TrendingUp,
-  Server
+  Server,
+  Plus,
+  Trash2,
+  Edit
 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { apiRequest, queryClient } from '@/lib/queryClient';
@@ -61,7 +64,7 @@ export default function AdminDashboard() {
     queryKey: ['/api/admin/stats'],
     queryFn: async () => {
       const token = localStorage.getItem('admin_token');
-      const response = await apiRequest('GET', '/api/admin/stats', {
+      const response = await apiRequest('GET', '/api/admin/stats', undefined, {
         'Authorization': `Bearer ${token}`
       });
       return response.json();
@@ -73,7 +76,7 @@ export default function AdminDashboard() {
     queryKey: ['/api/admin/activity'],
     queryFn: async () => {
       const token = localStorage.getItem('admin_token');
-      const response = await apiRequest('GET', '/api/admin/activity', {
+      const response = await apiRequest('GET', '/api/admin/activity', undefined, {
         'Authorization': `Bearer ${token}`
       });
       return response.json();
@@ -86,7 +89,7 @@ export default function AdminDashboard() {
     queryKey: ['/api/admin/settings'],
     queryFn: async () => {
       const token = localStorage.getItem('admin_token');
-      const response = await apiRequest('GET', '/api/admin/settings', {
+      const response = await apiRequest('GET', '/api/admin/settings', undefined, {
         'Authorization': `Bearer ${token}`
       });
       return response.json();
@@ -282,9 +285,9 @@ export default function AdminDashboard() {
               <BarChart3 className="w-4 h-4 mr-2" />
               Overview
             </TabsTrigger>
-            <TabsTrigger value="users" className="data-[state=active]:bg-nord-green data-[state=active]:text-black" data-testid="tab-users">
-              <Users className="w-4 h-4 mr-2" />
-              Users
+            <TabsTrigger value="blog" className="data-[state=active]:bg-nord-green data-[state=active]:text-black" data-testid="tab-blog">
+              <Edit className="w-4 h-4 mr-2" />
+              Blog Management
             </TabsTrigger>
             <TabsTrigger value="support" className="data-[state=active]:bg-nord-green data-[state=active]:text-black" data-testid="tab-support">
               <MessageCircle className="w-4 h-4 mr-2" />
@@ -389,6 +392,161 @@ export default function AdminDashboard() {
                 <p className="text-gray-400">Support system coming soon...</p>
               </CardContent>
             </Card>
+          </TabsContent>
+
+          {/* Blog Management Tab */}
+          <TabsContent value="blog" className="space-y-6">
+            <div className="grid grid-cols-1 gap-6">
+              <Card className="bg-black/30 border-gray-800/50 backdrop-blur-sm">
+                <CardHeader>
+                  <CardTitle className="flex items-center justify-between">
+                    <div className="flex items-center space-x-2">
+                      <Edit className="w-5 h-5 text-nord-green" />
+                      <span>Blog Management</span>
+                    </div>
+                    <Button 
+                      className="bg-nord-green text-black hover:bg-nord-green/90"
+                      data-testid="button-new-blog-post"
+                    >
+                      <Plus className="w-4 h-4 mr-2" />
+                      New Post
+                    </Button>
+                  </CardTitle>
+                  <CardDescription>Create and manage blog posts for your website</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between p-4 bg-gray-800/50 rounded-lg border border-gray-700">
+                      <div>
+                        <h3 className="font-medium text-white">Welcome to NordMail Blog</h3>
+                        <p className="text-sm text-gray-400 mt-1">Your guide to temporary email services</p>
+                        <div className="flex items-center space-x-4 mt-2">
+                          <span className="px-2 py-1 text-xs bg-green-900/50 text-green-400 rounded-full border border-green-800">
+                            Published
+                          </span>
+                          <span className="text-xs text-gray-500">Published 2 days ago</span>
+                        </div>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <Button variant="outline" size="sm" className="border-gray-600 text-gray-300 hover:bg-gray-800">
+                          <Edit className="w-4 h-4" />
+                        </Button>
+                        <Button variant="outline" size="sm" className="border-red-600 text-red-400 hover:bg-red-900/20">
+                          <Trash2 className="w-4 h-4" />
+                        </Button>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-center justify-between p-4 bg-gray-800/50 rounded-lg border border-gray-700">
+                      <div>
+                        <h3 className="font-medium text-white">Privacy and Security Best Practices</h3>
+                        <p className="text-sm text-gray-400 mt-1">Keep your online identity safe with temporary emails</p>
+                        <div className="flex items-center space-x-4 mt-2">
+                          <span className="px-2 py-1 text-xs bg-yellow-900/50 text-yellow-400 rounded-full border border-yellow-800">
+                            Draft
+                          </span>
+                          <span className="text-xs text-gray-500">Last edited 1 hour ago</span>
+                        </div>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <Button variant="outline" size="sm" className="border-gray-600 text-gray-300 hover:bg-gray-800">
+                          <Edit className="w-4 h-4" />
+                        </Button>
+                        <Button variant="outline" size="sm" className="border-red-600 text-red-400 hover:bg-red-900/20">
+                          <Trash2 className="w-4 h-4" />
+                        </Button>
+                      </div>
+                    </div>
+
+                    <div className="text-center py-8">
+                      <p className="text-gray-400 mb-4">Ready to share your knowledge?</p>
+                      <Button 
+                        className="bg-nord-green text-black hover:bg-nord-green/90"
+                        data-testid="button-create-first-post"
+                      >
+                        <Plus className="w-4 h-4 mr-2" />
+                        Create Your First Blog Post
+                      </Button>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Blog Settings & Backup */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <Card className="bg-black/30 border-gray-800/50 backdrop-blur-sm">
+                  <CardHeader>
+                    <CardTitle className="flex items-center space-x-2">
+                      <Settings className="w-5 h-5 text-nord-green" />
+                      <span>Blog Settings</span>
+                    </CardTitle>
+                    <CardDescription>Configure your blog appearance</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-4">
+                      <div>
+                        <Label className="text-gray-300">Blog Title</Label>
+                        <Input 
+                          defaultValue="NordMail Blog"
+                          className="bg-gray-800 border-gray-700 text-white mt-1"
+                          data-testid="input-blog-title"
+                        />
+                      </div>
+                      <div className="flex items-center space-x-3">
+                        <input 
+                          type="checkbox" 
+                          id="enable-comments"
+                          defaultChecked={true}
+                          className="w-4 h-4 text-nord-green bg-gray-800 border-gray-700 rounded focus:ring-nord-green"
+                          data-testid="checkbox-enable-comments"
+                        />
+                        <Label htmlFor="enable-comments" className="text-gray-300">
+                          Enable comments
+                        </Label>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card className="bg-black/30 border-gray-800/50 backdrop-blur-sm">
+                  <CardHeader>
+                    <CardTitle className="flex items-center space-x-2">
+                      <Server className="w-5 h-5 text-nord-green" />
+                      <span>Automated Backups</span>
+                    </CardTitle>
+                    <CardDescription>Database backup & deployment ready</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-3">
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm text-gray-400">Database Migration</span>
+                        <span className="text-xs px-2 py-1 bg-green-900/50 text-green-400 rounded-full border border-green-800">
+                          Automated
+                        </span>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm text-gray-400">Daily Backups</span>
+                        <span className="text-xs px-2 py-1 bg-green-900/50 text-green-400 rounded-full border border-green-800">
+                          Active
+                        </span>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm text-gray-400">S3 Storage</span>
+                        <span className="text-xs px-2 py-1 bg-gray-700 text-gray-400 rounded-full">
+                          Ready
+                        </span>
+                      </div>
+                      <Button 
+                        className="w-full mt-4 bg-nord-green text-black hover:bg-nord-green/90"
+                        data-testid="button-run-backup"
+                      >
+                        Run Manual Backup
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
           </TabsContent>
 
           <TabsContent value="settings">

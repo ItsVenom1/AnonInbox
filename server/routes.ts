@@ -1,7 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { insertTempAccountSchema, insertEmailAddressSchema, insertMessageSchema, type MailTmDomain, type MailTmAccount, type MailTmToken, type MailTmMessage } from "@shared/schema";
+import { insertTempAccountSchema, insertEmailAddressSchema, insertMessageSchema, insertBlogPostSchema, insertBlogCategorySchema, insertBackupConfigSchema, type MailTmDomain, type MailTmAccount, type MailTmToken, type MailTmMessage } from "@shared/schema";
 import { z } from "zod";
 
 const MAILTM_API_BASE = 'https://api.mail.tm';
@@ -549,6 +549,170 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error('Admin settings fetch error:', error);
       res.status(500).json({ error: 'Failed to fetch admin settings' });
+    }
+  });
+
+  // Blog Management API
+  app.get('/api/admin/blog/posts', async (req, res) => {
+    try {
+      const authHeader = req.headers.authorization;
+      if (!authHeader || !authHeader.startsWith('Bearer ')) {
+        return res.status(401).json({ error: 'Authentication required' });
+      }
+
+      const { status, limit = 50, offset = 0 } = req.query;
+      const posts = await storage.getBlogPosts({
+        status: status as string,
+        limit: Number(limit),
+        offset: Number(offset)
+      });
+      res.json(posts);
+    } catch (error) {
+      console.error('Error fetching blog posts:', error);
+      res.status(500).json({ error: 'Failed to fetch blog posts' });
+    }
+  });
+
+  app.post('/api/admin/blog/posts', async (req, res) => {
+    try {
+      const authHeader = req.headers.authorization;
+      if (!authHeader || !authHeader.startsWith('Bearer ')) {
+        return res.status(401).json({ error: 'Authentication required' });
+      }
+
+      const validatedData = insertBlogPostSchema.parse(req.body);
+      const post = await storage.createBlogPost(validatedData);
+      res.status(201).json(post);
+    } catch (error) {
+      console.error('Error creating blog post:', error);
+      res.status(400).json({ error: 'Failed to create blog post' });
+    }
+  });
+
+  app.get('/api/admin/blog/posts/:id', async (req, res) => {
+    try {
+      const authHeader = req.headers.authorization;
+      if (!authHeader || !authHeader.startsWith('Bearer ')) {
+        return res.status(401).json({ error: 'Authentication required' });
+      }
+
+      const post = await storage.getBlogPost(req.params.id);
+      if (!post) {
+        return res.status(404).json({ error: 'Blog post not found' });
+      }
+      res.json(post);
+    } catch (error) {
+      console.error('Error fetching blog post:', error);
+      res.status(500).json({ error: 'Failed to fetch blog post' });
+    }
+  });
+
+  app.put('/api/admin/blog/posts/:id', async (req, res) => {
+    try {
+      const authHeader = req.headers.authorization;
+      if (!authHeader || !authHeader.startsWith('Bearer ')) {
+        return res.status(401).json({ error: 'Authentication required' });
+      }
+
+      const post = await storage.updateBlogPost(req.params.id, req.body);
+      res.json(post);
+    } catch (error) {
+      console.error('Error updating blog post:', error);
+      res.status(500).json({ error: 'Failed to update blog post' });
+    }
+  });
+
+  app.delete('/api/admin/blog/posts/:id', async (req, res) => {
+    try {
+      const authHeader = req.headers.authorization;
+      if (!authHeader || !authHeader.startsWith('Bearer ')) {
+        return res.status(401).json({ error: 'Authentication required' });
+      }
+
+      await storage.deleteBlogPost(req.params.id);
+      res.status(204).send();
+    } catch (error) {
+      console.error('Error deleting blog post:', error);
+      res.status(500).json({ error: 'Failed to delete blog post' });
+    }
+  });
+
+  // Blog Categories API
+  app.get('/api/admin/blog/categories', async (req, res) => {
+    try {
+      const authHeader = req.headers.authorization;
+      if (!authHeader || !authHeader.startsWith('Bearer ')) {
+        return res.status(401).json({ error: 'Authentication required' });
+      }
+
+      const categories = await storage.getBlogCategories();
+      res.json(categories);
+    } catch (error) {
+      console.error('Error fetching blog categories:', error);
+      res.status(500).json({ error: 'Failed to fetch blog categories' });
+    }
+  });
+
+  app.post('/api/admin/blog/categories', async (req, res) => {
+    try {
+      const authHeader = req.headers.authorization;
+      if (!authHeader || !authHeader.startsWith('Bearer ')) {
+        return res.status(401).json({ error: 'Authentication required' });
+      }
+
+      const validatedData = insertBlogCategorySchema.parse(req.body);
+      const category = await storage.createBlogCategory(validatedData);
+      res.status(201).json(category);
+    } catch (error) {
+      console.error('Error creating blog category:', error);
+      res.status(400).json({ error: 'Failed to create blog category' });
+    }
+  });
+
+  // Backup Management API
+  app.get('/api/admin/backups/configs', async (req, res) => {
+    try {
+      const authHeader = req.headers.authorization;
+      if (!authHeader || !authHeader.startsWith('Bearer ')) {
+        return res.status(401).json({ error: 'Authentication required' });
+      }
+
+      const configs = await storage.getBackupConfigs();
+      res.json(configs);
+    } catch (error) {
+      console.error('Error fetching backup configs:', error);
+      res.status(500).json({ error: 'Failed to fetch backup configs' });
+    }
+  });
+
+  app.post('/api/admin/backups/configs', async (req, res) => {
+    try {
+      const authHeader = req.headers.authorization;
+      if (!authHeader || !authHeader.startsWith('Bearer ')) {
+        return res.status(401).json({ error: 'Authentication required' });
+      }
+
+      const validatedData = insertBackupConfigSchema.parse(req.body);
+      const config = await storage.createBackupConfig(validatedData);
+      res.status(201).json(config);
+    } catch (error) {
+      console.error('Error creating backup config:', error);
+      res.status(400).json({ error: 'Failed to create backup config' });
+    }
+  });
+
+  app.post('/api/admin/backups/:configId/run', async (req, res) => {
+    try {
+      const authHeader = req.headers.authorization;
+      if (!authHeader || !authHeader.startsWith('Bearer ')) {
+        return res.status(401).json({ error: 'Authentication required' });
+      }
+
+      const result = await storage.performBackup(req.params.configId);
+      res.json(result);
+    } catch (error) {
+      console.error('Error performing backup:', error);
+      res.status(500).json({ error: 'Failed to perform backup' });
     }
   });
 
