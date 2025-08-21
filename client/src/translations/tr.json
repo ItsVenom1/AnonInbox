@@ -1,0 +1,89 @@
+{
+  "nav": {
+    "language": "Dil"
+  },
+  "home": {
+    "title": "Geçici E-posta Basitleştirildi",
+    "subtitle": "En gelişmiş geçici e-posta hizmeti. Anında sınırsız tek kullanımlık e-posta adresleri oluşturun. %100 ücretsiz, kayıt gerektirmez. Gelen kutunuzu bir profesyonel gibi koruyun.",
+    "createEmail": "Şimdi Ücretsiz E-posta Oluştur",
+    "accessAccount": "Mevcut Hesaba Erişim",
+    "noRegistration": "Kayıt Gerekmiyor",
+    "instantActivation": "Anında Aktivasyon",
+    "realTimeDelivery": "Gerçek Zamanlı Mesaj Teslimatı",
+    "features": {
+      "fast": {
+        "title": "Şimşek Hızında",
+        "description": "3 saniyeden az sürede sınırsız e-posta oluşturun. Form yok, doğrulama yok, bekleme yok."
+      },
+      "privacy": {
+        "title": "Gizlilik Koruması",
+        "description": "Askeri düzeyde gizlilik. Gerçek e-postanız spam gönderenlerden tamamen gizli kalır."
+      },
+      "real": {
+        "title": "Gerçek E-posta Sistemi",
+        "description": "Herhangi bir hizmetle çalışan %100 gerçek e-posta adresleri. Doğrulamalar için mükemmel."
+      }
+    },
+    "testimonials": {
+      "john": "İş ve kişisel işler için günlük olarak tonlarca web sitesine kayıt oluyorum. Artık asla gerçek e-postamı vermiyorum çünkü siteler hack'lendiğinde veya güvenilmez sahipler verilerinizi sattığında spam ile boğuluyorsunuz. NordMail kişisel e-postamı tamamen koruyor - hayat kurtarıcı!",
+      "sarah": "Serbest çalışan olarak sürekli yeni platformlara ve hizmetlere kayıt oluyorum. NordMail gelen kutumun spam ile yok olması veya e-postamın pazarlamacılara satılması konusunda endişelenmeden her şeyi güvenle test etmemi sağlıyor.",
+      "michael": "Online alışveriş ve yeni uygulamaları test etmek eskiden e-postamı herkese vermek anlamına geliyordu. Şimdi önemli olmayan her şey için NordMail kullanıyorum. Gerçek gelen kutum temiz kalıyor ve beni etkileyen veri ihlalleri konusunda asla endişelenmiyorum."
+    }
+  },
+  "dashboard": {
+    "myEmails": "E-postalarım",
+    "account": "Hesap",
+    "refresh": "Yenile",
+    "random": "Rastgele",
+    "custom": "Özel",
+    "emails": "E-postalar",
+    "inbox": "Gelen Kutusu",
+    "message": "Mesaj",
+    "noEmails": "Henüz e-posta yok",
+    "noEmailsDesc": "Başlamak için ilk geçici e-posta adresinizi oluşturun",
+    "randomEmail": "Rastgele E-posta",
+    "customEmail": "Özel E-posta",
+    "selectEmail": "Mesajları görüntülemek için bir e-posta seçin",
+    "searchEmails": "E-posta ara...",
+    "copied": "Kopyalandı!",
+    "emailCopied": "E-posta adresi panoya kopyalandı",
+    "created": "Oluşturuldu",
+    "newEmailCreated": "Yeni e-posta oluşturuldu!",
+    "emailReady": "kullanıma hazır",
+    "error": "Hata",
+    "createError": "E-posta adresi oluşturulamadı. Lütfen tekrar deneyin.",
+    "copyError": "E-posta adresi kopyalanamadı"
+  },
+  "modals": {
+    "customEmail": {
+      "title": "Özel E-posta Oluştur",
+      "username": "E-posta kullanıcı adınızı seçin",
+      "placeholder": "benim11",
+      "description": "Geçici e-postanız için benzersiz bir kullanıcı adı seçin",
+      "create": "Özel E-posta Oluştur",
+      "randomInstead": "Bunun Yerine Rastgele",
+      "creating": "Oluşturuluyor..."
+    },
+    "account": {
+      "title": "Hesap Bilgilerini Düzenle",
+      "warning": "⚠️ Önemli: Oluşturduğunuz e-postaları saklamak istiyorsanız, hesap bilgilerinizi kaydettiğinizden emin olun veya hatırlayabileceğiniz detaylar ekleyin. Kimlik bilgilerinizi kaydetmeden, geçici e-postalarınıza erişimi kaybedebilirsiniz.",
+      "username": "Kullanıcı Adı",
+      "password": "Şifre",
+      "personalEmail": "Kişisel E-posta (İsteğe Bağlı)",
+      "personalEmailDesc": "Hesap kurtarma için kişisel e-postanızı ekleyin",
+      "save": "Değişiklikleri Kaydet",
+      "cancel": "İptal",
+      "saving": "Kaydediliyor...",
+      "updated": "Hesap güncellendi!",
+      "updateSuccess": "Hesap bilgileriniz kaydedildi",
+      "updateError": "Hesap güncellenemedi"
+    }
+  },
+  "footer": {
+    "privacy": "Gizlilik Politikası",
+    "terms": "Hizmet Şartları",
+    "blog": "Blog",
+    "support": "Destek",
+    "disclaimer": "E-posta Sorumluluk Reddi"
+  }
+}

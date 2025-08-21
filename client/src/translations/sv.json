@@ -1,0 +1,89 @@
+{
+  "nav": {
+    "language": "Språk"
+  },
+  "home": {
+    "title": "Tillfällig E-post Förenklad",
+    "subtitle": "Den mest avancerade tillfälliga e-posttjänsten. Skapa obegränsade engångs-e-postadresser omedelbart. 100% gratis, ingen registrering krävs. Skydda din inkorg som en proffs.",
+    "createEmail": "Skapa Gratis E-post Nu",
+    "accessAccount": "Kom Åt Befintligt Konto",
+    "noRegistration": "Ingen Registrering Krävs",
+    "instantActivation": "Omedelbar Aktivering",
+    "realTimeDelivery": "Realtids Meddelandeleverans",
+    "features": {
+      "fast": {
+        "title": "Blixtsnabb",
+        "description": "Skapa obegränsade e-postmeddelanden på under 3 sekunder. Inga formulär, ingen verifiering, ingen väntan."
+      },
+      "privacy": {
+        "title": "Integritetsskydd",
+        "description": "Militärnivå integritet. Din riktiga e-post förblir helt dold från spammare."
+      },
+      "real": {
+        "title": "Äkta E-postsystem",
+        "description": "100% riktiga e-postadresser som fungerar med alla tjänster. Perfekt för verifieringar."
+      }
+    },
+    "testimonials": {
+      "john": "Jag registrerar mig på massor av webbplatser dagligen för arbete och personliga saker. Jag ger aldrig min riktiga e-post längre eftersom när webbplatser blir hackade eller opålitliga ägare säljer dina data, blir du översvämmad med spam. NordMail skyddar min personliga e-post helt - det är en livräddare!",
+      "sarah": "Som frilansare registrerar jag mig ständigt på nya plattformar och tjänster. NordMail låter mig testa allt säkert utan att oroa mig för att min inkorg förstörs av spam eller att min e-post säljs till marknadsförare.",
+      "michael": "Näthandel och att testa nya appar brukade betyda att ge bort sin e-post till alla. Nu använder jag NordMail för allt som inte är väsentligt. Min riktiga inkorg förblir ren och jag oroar mig aldrig för dataintrång som påverkar mig."
+    }
+  },
+  "dashboard": {
+    "myEmails": "Mina E-postmeddelanden",
+    "account": "Konto",
+    "refresh": "Uppdatera",
+    "random": "Slumpmässig",
+    "custom": "Anpassad",
+    "emails": "E-postmeddelanden",
+    "inbox": "Inkorg",
+    "message": "Meddelande",
+    "noEmails": "Inga e-postmeddelanden än",
+    "noEmailsDesc": "Skapa din första tillfälliga e-postadress för att komma igång",
+    "randomEmail": "Slumpmässig E-post",
+    "customEmail": "Anpassad E-post",
+    "selectEmail": "Välj en e-post för att visa meddelanden",
+    "searchEmails": "Sök e-postmeddelanden...",
+    "copied": "Kopierad!",
+    "emailCopied": "E-postadress kopierad till urklipp",
+    "created": "Skapad",
+    "newEmailCreated": "Ny e-post skapad!",
+    "emailReady": "är redo att använda",
+    "error": "Fel",
+    "createError": "Misslyckades med att skapa e-postadress. Försök igen.",
+    "copyError": "Misslyckades med att kopiera e-postadress"
+  },
+  "modals": {
+    "customEmail": {
+      "title": "Skapa Anpassad E-post",
+      "username": "Välj ditt e-postanvändarnamn",
+      "placeholder": "mittnamn11",
+      "description": "Välj ett unikt användarnamn för din tillfälliga e-post",
+      "create": "Skapa Anpassad E-post",
+      "randomInstead": "Slumpmässig Istället",
+      "creating": "Skapar..."
+    },
+    "account": {
+      "title": "Redigera Kontoinformation",
+      "warning": "⚠️ Viktigt: Om du vill behålla e-postmeddelandena du skapade, se till att spara din kontoinformation eller lägga till detaljer du kan komma ihåg. Utan att spara dina inloggningsuppgifter kan du förlora åtkomst till dina tillfälliga e-postmeddelanden.",
+      "username": "Användarnamn",
+      "password": "Lösenord",
+      "personalEmail": "Personlig E-post (Valfritt)",
+      "personalEmailDesc": "Lägg till din personliga e-post för kontoåterställning",
+      "save": "Spara Ändringar",
+      "cancel": "Avbryt",
+      "saving": "Sparar...",
+      "updated": "Konto uppdaterat!",
+      "updateSuccess": "Din kontoinformation har sparats",
+      "updateError": "Misslyckades med att uppdatera konto"
+    }
+  },
+  "footer": {
+    "privacy": "Integritetspolicy",
+    "terms": "Användarvillkor",
+    "blog": "Blogg",
+    "support": "Support",
+    "disclaimer": "E-post Ansvarsfriskrivning"
+  }
+}

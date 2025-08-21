@@ -1,0 +1,89 @@
+{
+  "nav": {
+    "language": "Idioma"
+  },
+  "home": {
+    "title": "Email Temporal Simplificado",
+    "subtitle": "El servicio de email temporal más avanzado. Crea direcciones de correo desechables ilimitadas al instante. 100% gratis, sin registro requerido. Protege tu bandeja de entrada como un profesional.",
+    "createEmail": "Crear Email Gratis Ahora",
+    "accessAccount": "Acceder a Cuenta Existente",
+    "noRegistration": "Sin Registro Requerido",
+    "instantActivation": "Activación Instantánea",
+    "realTimeDelivery": "Entrega de Mensajes en Tiempo Real",
+    "features": {
+      "fast": {
+        "title": "Súper Rápido",
+        "description": "Crea emails ilimitados en menos de 3 segundos. Sin formularios, sin verificación, sin esperas."
+      },
+      "privacy": {
+        "title": "Protección de Privacidad",
+        "description": "Privacidad de grado militar. Tu email real permanece completamente oculto de los spammers."
+      },
+      "real": {
+        "title": "Sistema de Email Real",
+        "description": "Direcciones de email 100% reales que funcionan con cualquier servicio. Perfecto para verificaciones."
+      }
+    },
+    "testimonials": {
+      "john": "Me registro en toneladas de sitios web diariamente para trabajo y cosas personales. Ya no doy mi email real porque cuando los sitios son hackeados o propietarios poco confiables venden tus datos, te inundan con spam. NordMail protege mi email personal completamente - ¡es un salvavidas!",
+      "sarah": "Como freelancer, constantemente me registro en nuevas plataformas y servicios. NordMail me permite probar todo de forma segura sin preocuparme de que mi bandeja de entrada sea destruida por spam o que mi email sea vendido a marketers.",
+      "michael": "Las compras en línea y probar nuevas apps solía significar dar mi email a todos. Ahora uso NordMail para todo lo no esencial. Mi bandeja real se mantiene limpia y nunca me preocupo por brechas de datos que me afecten."
+    }
+  },
+  "dashboard": {
+    "myEmails": "Mis Emails",
+    "account": "Cuenta",
+    "refresh": "Actualizar",
+    "random": "Aleatorio",
+    "custom": "Personalizado",
+    "emails": "Emails",
+    "inbox": "Bandeja",
+    "message": "Mensaje",
+    "noEmails": "Sin emails aún",
+    "noEmailsDesc": "Crea tu primera dirección de email temporal para comenzar",
+    "randomEmail": "Email Aleatorio",
+    "customEmail": "Email Personalizado",
+    "selectEmail": "Selecciona un email para ver mensajes",
+    "searchEmails": "Buscar emails...",
+    "copied": "¡Copiado!",
+    "emailCopied": "Dirección de email copiada al portapapeles",
+    "created": "Creado",
+    "newEmailCreated": "¡Nuevo email creado!",
+    "emailReady": "está listo para usar",
+    "error": "Error",
+    "createError": "Error al crear la dirección de email. Por favor intenta de nuevo.",
+    "copyError": "Error al copiar la dirección de email"
+  },
+  "modals": {
+    "customEmail": {
+      "title": "Crear Email Personalizado",
+      "username": "Elige tu nombre de usuario de email",
+      "placeholder": "minombre11",
+      "description": "Elige un nombre de usuario único para tu email temporal",
+      "create": "Crear Email Personalizado",
+      "randomInstead": "Aleatorio En Su Lugar",
+      "creating": "Creando..."
+    },
+    "account": {
+      "title": "Editar Información de Cuenta",
+      "warning": "⚠️ Importante: Si quieres mantener los emails que creaste, asegúrate de guardar la información de tu cuenta o agregar detalles que puedas recordar. Sin guardar tus credenciales, puedes perder acceso a tus emails temporales.",
+      "username": "Nombre de Usuario",
+      "password": "Contraseña",
+      "personalEmail": "Email Personal (Opcional)",
+      "personalEmailDesc": "Agrega tu email personal para recuperación de cuenta",
+      "save": "Guardar Cambios",
+      "cancel": "Cancelar",
+      "saving": "Guardando...",
+      "updated": "¡Cuenta actualizada!",
+      "updateSuccess": "Tu información de cuenta ha sido guardada",
+      "updateError": "Error al actualizar la cuenta"
+    }
+  },
+  "footer": {
+    "privacy": "Política de Privacidad",
+    "terms": "Términos de Servicio",
+    "blog": "Blog",
+    "support": "Soporte",
+    "disclaimer": "Descargo de Responsabilidad de Email"
+  }
+}

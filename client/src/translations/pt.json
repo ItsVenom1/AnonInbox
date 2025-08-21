@@ -1,0 +1,89 @@
+{
+  "nav": {
+    "language": "Idioma"
+  },
+  "home": {
+    "title": "Email Temporário Simplificado",
+    "subtitle": "O serviço de email temporário mais avançado. Crie endereços de email descartáveis ilimitados instantaneamente. 100% gratuito, sem registro necessário. Proteja sua caixa de entrada como um profissional.",
+    "createEmail": "Criar Email Gratuito Agora",
+    "accessAccount": "Acessar Conta Existente",
+    "noRegistration": "Sem Registro Necessário",
+    "instantActivation": "Ativação Instantânea",
+    "realTimeDelivery": "Entrega de Mensagens em Tempo Real",
+    "features": {
+      "fast": {
+        "title": "Super Rápido",
+        "description": "Crie emails ilimitados em menos de 3 segundos. Sem formulários, sem verificação, sem espera."
+      },
+      "privacy": {
+        "title": "Proteção de Privacidade",
+        "description": "Privacidade de nível militar. Seu email real permanece completamente oculto de spammers."
+      },
+      "real": {
+        "title": "Sistema de Email Real",
+        "description": "Endereços de email 100% reais que funcionam com qualquer serviço. Perfeito para verificações."
+      }
+    },
+    "testimonials": {
+      "john": "Eu me registro em toneladas de sites diariamente para trabalho e coisas pessoais. Nunca mais dou meu email real porque quando sites são hackeados ou proprietários não confiáveis vendem seus dados, você fica inundado com spam. NordMail protege meu email pessoal completamente - é um salva-vidas!",
+      "sarah": "Como freelancer, estou constantemente me registrando em novas plataformas e serviços. NordMail me permite testar tudo com segurança sem me preocupar com minha caixa de entrada sendo destruída por spam ou meu email sendo vendido para marqueteiros.",
+      "michael": "Compras online e testar novos aplicativos costumava significar dar meu email para todo mundo. Agora uso NordMail para tudo que não é essencial. Minha caixa de entrada real permanece limpa e nunca me preocupo com violações de dados que me afetam."
+    }
+  },
+  "dashboard": {
+    "myEmails": "Meus Emails",
+    "account": "Conta",
+    "refresh": "Atualizar",
+    "random": "Aleatório",
+    "custom": "Personalizado",
+    "emails": "Emails",
+    "inbox": "Caixa de Entrada",
+    "message": "Mensagem",
+    "noEmails": "Ainda sem emails",
+    "noEmailsDesc": "Crie seu primeiro endereço de email temporário para começar",
+    "randomEmail": "Email Aleatório",
+    "customEmail": "Email Personalizado",
+    "selectEmail": "Selecione um email para ver mensagens",
+    "searchEmails": "Pesquisar emails...",
+    "copied": "Copiado!",
+    "emailCopied": "Endereço de email copiado para a área de transferência",
+    "created": "Criado",
+    "newEmailCreated": "Novo email criado!",
+    "emailReady": "está pronto para usar",
+    "error": "Erro",
+    "createError": "Falha ao criar endereço de email. Tente novamente.",
+    "copyError": "Falha ao copiar endereço de email"
+  },
+  "modals": {
+    "customEmail": {
+      "title": "Criar Email Personalizado",
+      "username": "Escolha seu nome de usuário de email",
+      "placeholder": "meunome11",
+      "description": "Escolha um nome de usuário único para seu email temporário",
+      "create": "Criar Email Personalizado",
+      "randomInstead": "Aleatório Em Vez Disso",
+      "creating": "Criando..."
+    },
+    "account": {
+      "title": "Editar Informações da Conta",
+      "warning": "⚠️ Importante: Se você quiser manter os emails que criou, certifique-se de salvar as informações da sua conta ou adicionar detalhes que possa lembrar. Sem salvar suas credenciais, você pode perder o acesso aos seus emails temporários.",
+      "username": "Nome de Usuário",
+      "password": "Senha",
+      "personalEmail": "Email Pessoal (Opcional)",
+      "personalEmailDesc": "Adicione seu email pessoal para recuperação da conta",
+      "save": "Salvar Alterações",
+      "cancel": "Cancelar",
+      "saving": "Salvando...",
+      "updated": "Conta atualizada!",
+      "updateSuccess": "As informações da sua conta foram salvas",
+      "updateError": "Falha ao atualizar conta"
+    }
+  },
+  "footer": {
+    "privacy": "Política de Privacidade",
+    "terms": "Termos de Serviço",
+    "blog": "Blog",
+    "support": "Suporte",
+    "disclaimer": "Isenção de Responsabilidade de Email"
+  }
+}

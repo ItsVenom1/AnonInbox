@@ -1,0 +1,568 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NordMail - Secure Temporary Email Service</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'nord-green': '#b7ff00',
+                        'nord-dark': '#111111',
+                        'nord-darker': '#0a0a0a',
+                    },
+                    fontFamily: {
+                        'inter': ['Inter', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-black text-white font-inter">
+    
+    <!-- @COMPONENT: Header [Navigation with logo and account access] -->
+    <header class="border-b border-gray-800 sticky top-0 bg-black z-50">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="w-8 h-8 bg-nord-green rounded-lg flex items-center justify-center">
+                    <i class="fas fa-shield-alt text-black text-lg"></i>
+                </div>
+                <h1 class="text-xl font-bold text-nord-green">NordMail</h1>
+            </div>
+            
+            <div class="flex items-center space-x-4">
+                <button data-event="click:toggleAccount" class="p-2 hover:bg-nord-dark rounded-lg transition-colors">
+                    <i class="fas fa-user-circle text-xl text-nord-green"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+    <!-- @END_COMPONENT: Header -->
+
+    <!-- @COMPONENT: HeroSection [Landing page with explanation and start button] -->
+    <section id="hero-section" class="min-h-screen flex items-center justify-center px-4 py-20">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="mb-8">
+                <div class="w-20 h-20 bg-nord-green rounded-2xl flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-envelope-open-text text-black text-3xl"></i>
+                </div>
+                <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+                    Protect Your <span class="text-nord-green">Real Email</span> Address
+                </h1>
+                <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed">
+                    Get instant temporary email addresses for sign-ups, downloads, and testing. 
+                    No registration required - start protecting your privacy immediately.
+                </p>
+            </div>
+
+            <div class="bg-nord-dark border border-gray-800 rounded-2xl p-8 mb-8 max-w-2xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                    <div class="flex flex-col items-center">
+                        <div class="w-12 h-12 bg-nord-green/20 rounded-xl flex items-center justify-center mb-3">
+                            <i class="fas fa-bolt text-nord-green text-xl"></i>
+                        </div>
+                        <h3 class="font-semibold mb-2">Instant Access</h3>
+                        <p class="text-sm text-gray-400">Get your temporary email in seconds</p>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="w-12 h-12 bg-nord-green/20 rounded-xl flex items-center justify-center mb-3">
+                            <i class="fas fa-eye-slash text-nord-green text-xl"></i>
+                        </div>
+                        <h3 class="font-semibold mb-2">Anonymous</h3>
+                        <p class="text-sm text-gray-400">No personal information required</p>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="w-12 h-12 bg-nord-green/20 rounded-xl flex items-center justify-center mb-3">
+                            <i class="fas fa-recycle text-nord-green text-xl"></i>
+                        </div>
+                        <h3 class="font-semibold mb-2">Disposable</h3>
+                        <p class="text-sm text-gray-400">Use once or keep for later</p>
+                    </div>
+                </div>
+            </div>
+
+            <button 
+                data-event="click:startService" 
+                class="bg-nord-green text-black px-8 py-4 rounded-xl text-lg font-semibold hover:bg-nord-green/90 transition-all transform hover:scale-105 shadow-lg shadow-nord-green/20">
+                <i class="fas fa-play mr-2"></i>
+                Start Using NordMail
+            </button>
+            
+            <p class="text-sm text-gray-500 mt-4">
+                No registration • No personal data • Instant access
+            </p>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: HeroSection -->
+
+    <!-- @COMPONENT: MainApp [Email service interface with inbox] -->
+    <section id="main-app" class="hidden min-h-screen bg-black">
+        <div class="max-w-6xl mx-auto px-4 py-8">
+            
+            <!-- @COMPONENT: EmailGenerator [Current email display and generation controls] -->
+            <div class="bg-nord-dark border border-gray-800 rounded-2xl p-6 mb-8">
+                <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
+                    <div class="flex-1">
+                        <h2 class="text-lg font-semibold mb-2">Your Temporary Email</h2>
+                        <div class="flex items-center space-x-3 bg-black border border-gray-700 rounded-lg p-4">
+                            <div class="flex-1">
+                                <span data-bind="currentEmail" id="current-email" class="text-nord-green font-mono text-lg">
+                                    <!-- @FUNCTIONALITY: Display generated email address -->
+                                    user1234@1secmail.com
+                                </span>
+                                <p class="text-sm text-gray-400 mt-1">Click to copy to clipboard</p>
+                            </div>
+                            <button 
+                                data-event="click:copyEmail"
+                                class="bg-nord-green text-black px-4 py-2 rounded-lg font-medium hover:bg-nord-green/90 transition-colors">
+                                <i class="fas fa-copy mr-2"></i>Copy
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="flex space-x-3">
+                        <button 
+                            data-event="click:generateNew"
+                            class="bg-gray-700 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition-colors">
+                            <i class="fas fa-sync-alt mr-2"></i>New Email
+                        </button>
+                        <button 
+                            data-event="click:refreshInbox"
+                            class="bg-nord-green/20 text-nord-green px-4 py-2 rounded-lg hover:bg-nord-green/30 transition-colors">
+                            <i class="fas fa-envelope mr-2"></i>Check Mail
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- @STATE: isLoading:boolean = false -->
+                <div id="loading-indicator" class="hidden mt-4 flex items-center justify-center">
+                    <div class="animate-spin rounded-full h-6 w-6 border-b-2 border-nord-green"></div>
+                    <span class="ml-2 text-sm text-gray-400">Checking for new messages...</span>
+                </div>
+            </div>
+            <!-- @END_COMPONENT: EmailGenerator -->
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                
+                <!-- @COMPONENT: EmailInbox [List of received emails] -->
+                <div class="lg:col-span-1">
+                    <div class="bg-nord-dark border border-gray-800 rounded-2xl">
+                        <div class="p-6 border-b border-gray-800">
+                            <div class="flex items-center justify-between">
+                                <h3 class="text-lg font-semibold">Inbox</h3>
+                                <span data-bind="messageCount" class="bg-nord-green text-black px-2 py-1 rounded-full text-sm font-medium">3</span>
+                            </div>
+                        </div>
+                        
+                        <div class="max-h-96 overflow-y-auto">
+                            <!-- @MAP: messages.map(message => ( -->
+                            <div data-event="click:selectMessage" data-message-id="msg1" class="p-4 hover:bg-black/50 cursor-pointer border-b border-gray-800 last:border-b-0 message-item">
+                                <div class="flex items-start space-x-3">
+                                    <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-envelope text-white text-xs"></i>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <div class="flex items-center justify-between mb-1">
+                                            <p data-bind="message.from.name" class="text-sm font-medium text-white truncate">GitHub</p>
+                                            <span data-bind="message.createdAt" class="text-xs text-gray-400">2m ago</span>
+                                        </div>
+                                        <p data-bind="message.subject" class="text-sm text-gray-300 truncate mb-1">Verify your email address</p>
+                                        <p data-bind="message.intro" class="text-xs text-gray-400 line-clamp-2">Please click the link below to verify your email address and complete...</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div data-event="click:selectMessage" data-message-id="msg2" class="p-4 hover:bg-black/50 cursor-pointer border-b border-gray-800 message-item">
+                                <div class="flex items-start space-x-3">
+                                    <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-envelope text-white text-xs"></i>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <div class="flex items-center justify-between mb-1">
+                                            <p data-bind="message.from.name" class="text-sm font-medium text-white truncate">Netflix</p>
+                                            <span data-bind="message.createdAt" class="text-xs text-gray-400">5m ago</span>
+                                        </div>
+                                        <p data-bind="message.subject" class="text-sm text-gray-300 truncate mb-1">Welcome to Netflix!</p>
+                                        <p data-bind="message.intro" class="text-xs text-gray-400 line-clamp-2">Your account has been created successfully. Start watching now...</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div data-event="click:selectMessage" data-message-id="msg3" class="p-4 hover:bg-black/50 cursor-pointer border-b border-gray-800 message-item">
+                                <div class="flex items-start space-x-3">
+                                    <div class="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-envelope text-white text-xs"></i>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <div class="flex items-center justify-between mb-1">
+                                            <p data-bind="message.from.name" class="text-sm font-medium text-white truncate">Adobe</p>
+                                            <span data-bind="message.createdAt" class="text-xs text-gray-400">1h ago</span>
+                                        </div>
+                                        <p data-bind="message.subject" class="text-sm text-gray-300 truncate mb-1">Activate your Creative Cloud trial</p>
+                                        <p data-bind="message.intro" class="text-xs text-gray-400 line-clamp-2">Thank you for signing up for Adobe Creative Cloud. Click here to...</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- @END_MAP )) -->
+                            
+                            <div id="empty-inbox" class="hidden p-8 text-center">
+                                <i class="fas fa-inbox text-4xl text-gray-600 mb-4"></i>
+                                <p class="text-gray-400 mb-2">No messages yet</p>
+                                <p class="text-sm text-gray-500">Use your temporary email to sign up for services</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- @END_COMPONENT: EmailInbox -->
+
+                <!-- @COMPONENT: EmailViewer [Selected email content display] -->
+                <div class="lg:col-span-2">
+                    <div id="email-viewer" class="bg-nord-dark border border-gray-800 rounded-2xl h-full">
+                        <div class="p-6 border-b border-gray-800">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 data-bind="selectedMessage.subject" class="text-lg font-semibold">Verify your email address</h3>
+                                <div class="flex space-x-2">
+                                    <button data-event="click:markAsRead" class="p-2 hover:bg-black/50 rounded-lg transition-colors">
+                                        <i class="fas fa-check text-gray-400"></i>
+                                    </button>
+                                    <button data-event="click:deleteMessage" class="p-2 hover:bg-black/50 rounded-lg transition-colors">
+                                        <i class="fas fa-trash text-red-400"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center space-x-4 text-sm text-gray-400">
+                                <div class="flex items-center space-x-2">
+                                    <span>From:</span>
+                                    <span data-bind="selectedMessage.from.address" class="text-white">noreply@github.com</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <span>To:</span>
+                                    <span data-bind="selectedMessage.to[0].address" class="text-nord-green">user1234@1secmail.com</span>
+                                </div>
+                                <span data-bind="selectedMessage.createdAt" class="ml-auto">2 minutes ago</span>
+                            </div>
+                        </div>
+                        
+                        <div class="p-6">
+                            <div data-bind="selectedMessage.html" class="prose prose-invert max-w-none">
+                                <!-- @FUNCTIONALITY: Display email HTML content -->
+                                <p>Hi there,</p>
+                                <p>Thank you for signing up for GitHub! To complete your registration, please verify your email address by clicking the button below:</p>
+                                
+                                <div class="my-6">
+                                    <a href="#" class="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg text-center font-medium hover:bg-blue-700 transition-colors">
+                                        Verify Email Address
+                                    </a>
+                                </div>
+                                
+                                <p>If the button doesn't work, you can copy and paste this link into your browser:</p>
+                                <p class="font-mono text-sm bg-gray-800 p-3 rounded">
+                                    https://github.com/users/verify?token=abc123xyz789
+                                </p>
+                                
+                                <p>This link will expire in 24 hours.</p>
+                                
+                                <p>Best regards,<br>The GitHub Team</p>
+                            </div>
+                            
+                            <div id="attachments" class="hidden mt-6 pt-6 border-t border-gray-800">
+                                <h4 class="text-sm font-medium mb-3">Attachments</h4>
+                                <!-- @MAP: selectedMessage.attachments.map(attachment => ( -->
+                                <div class="flex items-center space-x-3 p-3 bg-black rounded-lg">
+                                    <i class="fas fa-paperclip text-gray-400"></i>
+                                    <span data-bind="attachment.filename" class="flex-1">document.pdf</span>
+                                    <span data-bind="attachment.size" class="text-sm text-gray-400">1.2 MB</span>
+                                    <button data-event="click:downloadAttachment" class="text-nord-green hover:text-nord-green/80">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                </div>
+                                <!-- @END_MAP )) -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- @COMPONENT: EmptyEmailViewer [Shown when no email is selected] -->
+                    <div id="empty-viewer" class="hidden bg-nord-dark border border-gray-800 rounded-2xl h-full flex items-center justify-center">
+                        <div class="text-center">
+                            <i class="fas fa-envelope-open text-6xl text-gray-600 mb-4"></i>
+                            <h3 class="text-xl font-medium mb-2">Select an email to view</h3>
+                            <p class="text-gray-400">Choose a message from your inbox to read its contents</p>
+                        </div>
+                    </div>
+                    <!-- @END_COMPONENT: EmptyEmailViewer -->
+                </div>
+                <!-- @END_COMPONENT: EmailViewer -->
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: MainApp -->
+
+    <!-- @COMPONENT: AccountModal [User account information and login options] -->
+    <div id="account-modal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
+        <div class="bg-nord-dark border border-gray-800 rounded-2xl w-full max-w-md">
+            <div class="p-6 border-b border-gray-800">
+                <div class="flex items-center justify-between">
+                    <h3 class="text-lg font-semibold">Account Information</h3>
+                    <button data-event="click:closeModal" class="p-1 hover:bg-black/50 rounded">
+                        <i class="fas fa-times text-gray-400"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="p-6">
+                <!-- @COMPONENT: AutoAccount [Automatically generated account details] -->
+                <div class="bg-black border border-gray-700 rounded-lg p-4 mb-6">
+                    <h4 class="font-medium mb-3">Auto-Generated Account</h4>
+                    <div class="space-y-2 text-sm">
+                        <div class="flex justify-between">
+                            <span class="text-gray-400">Username:</span>
+                            <span data-bind="autoAccount.username" class="font-mono">user_7x9k2m</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-400">Password:</span>
+                            <span data-bind="autoAccount.password" class="font-mono">temp_9z8x7c</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-400">Created:</span>
+                            <span data-bind="autoAccount.createdAt">Today, 2:45 PM</span>
+                        </div>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-3">
+                        Use these credentials to access your temporary emails later
+                    </p>
+                </div>
+                <!-- @END_COMPONENT: AutoAccount -->
+
+                <!-- @COMPONENT: LoginForm [Existing account login] -->
+                <div class="space-y-4">
+                    <h4 class="font-medium">Have an existing account?</h4>
+                    <div class="space-y-3">
+                        <input 
+                            type="text" 
+                            placeholder="Username or email"
+                            class="w-full bg-black border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:border-nord-green focus:outline-none">
+                        <input 
+                            type="password" 
+                            placeholder="Password"
+                            class="w-full bg-black border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:border-nord-green focus:outline-none">
+                        <button 
+                            data-event="click:loginExisting"
+                            class="w-full bg-nord-green text-black py-3 rounded-lg font-medium hover:bg-nord-green/90 transition-colors">
+                            Login to Existing Account
+                        </button>
+                    </div>
+                </div>
+                <!-- @END_COMPONENT: LoginForm -->
+            </div>
+        </div>
+    </div>
+    <!-- @END_COMPONENT: AccountModal -->
+
+    <!-- @COMPONENT: CopyNotification [Success feedback for copy actions] -->
+    <div id="copy-notification" class="hidden fixed top-4 right-4 bg-nord-green text-black px-4 py-2 rounded-lg shadow-lg z-50">
+        <i class="fas fa-check mr-2"></i>
+        <span>Email address copied to clipboard!</span>
+    </div>
+    <!-- @END_COMPONENT: CopyNotification -->
+
+    <script>
+        (function() {
+            // TODO: Implement Mail.tm API integration
+            let currentEmailAddress = '';
+            let authToken = '';
+            let accountId = '';
+            let messages = [];
+            let selectedMessageId = null;
+
+            // DOM Elements
+            const heroSection = document.getElementById('hero-section');
+            const mainApp = document.getElementById('main-app');
+            const accountModal = document.getElementById('account-modal');
+            const copyNotification = document.getElementById('copy-notification');
+            const currentEmailSpan = document.getElementById('current-email');
+            const loadingIndicator = document.getElementById('loading-indicator');
+
+            // Initialize the application
+            function initializeApp() {
+                // TODO: Fetch available domains from Mail.tm API
+                // TODO: Generate automatic account credentials
+                // TODO: Create temporary email account
+                setupEventListeners();
+            }
+
+            function setupEventListeners() {
+                // Start service button
+                document.addEventListener('click', function(e) {
+                    if (e.target.closest('[data-event="click:startService"]')) {
+                        startService();
+                    }
+                });
+
+                // Account modal toggle
+                document.addEventListener('click', function(e) {
+                    if (e.target.closest('[data-event="click:toggleAccount"]')) {
+                        toggleAccountModal();
+                    }
+                });
+
+                // Copy email functionality
+                document.addEventListener('click', function(e) {
+                    if (e.target.closest('[data-event="click:copyEmail"]')) {
+                        copyEmailToClipboard();
+                    }
+                });
+
+                // Generate new email
+                document.addEventListener('click', function(e) {
+                    if (e.target.closest('[data-event="click:generateNew"]')) {
+                        generateNewEmail();
+                    }
+                });
+
+                // Refresh inbox
+                document.addEventListener('click', function(e) {
+                    if (e.target.closest('[data-event="click:refreshInbox"]')) {
+                        refreshInbox();
+                    }
+                });
+
+                // Message selection
+                document.addEventListener('click', function(e) {
+                    if (e.target.closest('[data-event="click:selectMessage"]')) {
+                        const messageId = e.target.closest('[data-event="click:selectMessage"]').dataset.messageId;
+                        selectMessage(messageId);
+                    }
+                });
+
+                // Close modal
+                document.addEventListener('click', function(e) {
+                    if (e.target.closest('[data-event="click:closeModal"]')) {
+                        closeModal();
+                    }
+                });
+
+                // Modal backdrop click
+                accountModal.addEventListener('click', function(e) {
+                    if (e.target === accountModal) {
+                        closeModal();
+                    }
+                });
+            }
+
+            // TODO: Implement Mail.tm API functions
+            async function fetchDomains() {
+                // Make GET request to https://api.mail.tm/domains
+                // Return available domains for email creation
+            }
+
+            async function createAccount(address, password) {
+                // Make POST request to https://api.mail.tm/accounts
+                // Store account details and get authentication token
+            }
+
+            async function getAuthToken(address, password) {
+                // Make POST request to https://api.mail.tm/token
+                // Store token for authenticated requests
+            }
+
+            async function fetchMessages() {
+                // Make GET request to https://api.mail.tm/messages
+                // Update messages array and UI
+            }
+
+            async function getMessage(messageId) {
+                // Make GET request to https://api.mail.tm/messages/{id}
+                // Return full message content
+            }
+
+            // UI Functions
+            function startService() {
+                heroSection.classList.add('hidden');
+                mainApp.classList.remove('hidden');
+                // TODO: Initialize temporary email generation
+                generateNewEmail();
+            }
+
+            function generateNewEmail() {
+                loadingIndicator.classList.remove('hidden');
+                
+                // TODO: Generate random username and create account via API
+                setTimeout(() => {
+                    // Simulate API call
+                    const randomUser = 'user' + Math.random().toString(36).substr(2, 8);
+                    currentEmailAddress = `${randomUser}@1secmail.com`;
+                    currentEmailSpan.textContent = currentEmailAddress;
+                    loadingIndicator.classList.add('hidden');
+                }, 1500);
+            }
+
+            function copyEmailToClipboard() {
+                navigator.clipboard.writeText(currentEmailAddress).then(() => {
+                    showCopyNotification();
+                });
+            }
+
+            function showCopyNotification() {
+                copyNotification.classList.remove('hidden');
+                setTimeout(() => {
+                    copyNotification.classList.add('hidden');
+                }, 3000);
+            }
+
+            function refreshInbox() {
+                loadingIndicator.classList.remove('hidden');
+                
+                // TODO: Fetch messages from API
+                setTimeout(() => {
+                    loadingIndicator.classList.add('hidden');
+                    // Update message count and list
+                }, 1000);
+            }
+
+            function selectMessage(messageId) {
+                selectedMessageId = messageId;
+                
+                // Update UI to show selected message
+                document.querySelectorAll('.message-item').forEach(item => {
+                    item.classList.remove('bg-nord-green/10', 'border-l-4', 'border-l-nord-green');
+                });
+                
+                const selectedItem = document.querySelector(`[data-message-id="${messageId}"]`);
+                if (selectedItem) {
+                    selectedItem.classList.add('bg-nord-green/10', 'border-l-4', 'border-l-nord-green');
+                }
+
+                // TODO: Fetch and display full message content
+                document.getElementById('email-viewer').classList.remove('hidden');
+                document.getElementById('empty-viewer').classList.add('hidden');
+            }
+
+            function toggleAccountModal() {
+                accountModal.classList.toggle('hidden');
+            }
+
+            function closeModal() {
+                accountModal.classList.add('hidden');
+            }
+
+            // Auto-refresh inbox every 30 seconds
+            setInterval(() => {
+                if (!mainApp.classList.contains('hidden')) {
+                    refreshInbox();
+                }
+            }, 30000);
+
+            // Initialize when DOM is loaded
+            document.addEventListener('DOMContentLoaded', initializeApp);
+        })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+{
+  "nav": {
+    "language": "Sprache"
+  },
+  "home": {
+    "title": "Temporäre E-Mail Vereinfacht",
+    "subtitle": "Der fortschrittlichste temporäre E-Mail-Service. Erstellen Sie unbegrenzt Wegwerf-E-Mail-Adressen sofort. 100% kostenlos, keine Registrierung erforderlich. Schützen Sie Ihren Posteingang wie ein Profi.",
+    "createEmail": "Kostenlose E-Mail Jetzt Erstellen",
+    "accessAccount": "Auf Bestehendes Konto Zugreifen",
+    "noRegistration": "Keine Registrierung Erforderlich",
+    "instantActivation": "Sofortige Aktivierung",
+    "realTimeDelivery": "Echtzeit-Nachrichtenzustellung",
+    "features": {
+      "fast": {
+        "title": "Blitzschnell",
+        "description": "Erstellen Sie unbegrenzt E-Mails in unter 3 Sekunden. Keine Formulare, keine Verifizierung, kein Warten."
+      },
+      "privacy": {
+        "title": "Datenschutz",
+        "description": "Militärische Privatsphäre. Ihre echte E-Mail bleibt völlig vor Spammern verborgen."
+      },
+      "real": {
+        "title": "Echtes E-Mail-System",
+        "description": "100% echte E-Mail-Adressen, die mit jedem Service funktionieren. Perfekt für Verifizierungen."
+      }
+    },
+    "testimonials": {
+      "john": "Ich registriere mich täglich auf unzähligen Websites für Arbeit und persönliche Sachen. Ich gebe nie mehr meine echte E-Mail an, denn wenn Seiten gehackt werden oder unvertrauenswürdige Besitzer Ihre Daten verkaufen, werden Sie mit Spam überflutet. NordMail schützt meine persönliche E-Mail komplett - es ist ein Lebensretter!",
+      "sarah": "Als Freelancerin melde ich mich ständig bei neuen Plattformen und Services an. NordMail lässt mich alles sicher testen, ohne mir Sorgen zu machen, dass mein Posteingang durch Spam zerstört oder meine E-Mail an Vermarkter verkauft wird.",
+      "michael": "Online-Shopping und das Testen neuer Apps bedeutete früher, meine E-Mail an jeden zu geben. Jetzt verwende ich NordMail für alles Nicht-Wesentliche. Mein echter Posteingang bleibt sauber und ich mache mir nie Sorgen über Datenverletzungen, die mich betreffen."
+    }
+  },
+  "dashboard": {
+    "myEmails": "Meine E-Mails",
+    "account": "Konto",
+    "refresh": "Aktualisieren",
+    "random": "Zufällig",
+    "custom": "Benutzerdefiniert",
+    "emails": "E-Mails",
+    "inbox": "Posteingang",
+    "message": "Nachricht",
+    "noEmails": "Noch keine E-Mails",
+    "noEmailsDesc": "Erstellen Sie Ihre erste temporäre E-Mail-Adresse, um zu beginnen",
+    "randomEmail": "Zufällige E-Mail",
+    "customEmail": "Benutzerdefinierte E-Mail",
+    "selectEmail": "Wählen Sie eine E-Mail, um Nachrichten anzuzeigen",
+    "searchEmails": "E-Mails suchen...",
+    "copied": "Kopiert!",
+    "emailCopied": "E-Mail-Adresse in die Zwischenablage kopiert",
+    "created": "Erstellt",
+    "newEmailCreated": "Neue E-Mail erstellt!",
+    "emailReady": "ist bereit zur Verwendung",
+    "error": "Fehler",
+    "createError": "E-Mail-Adresse konnte nicht erstellt werden. Bitte versuchen Sie es erneut.",
+    "copyError": "E-Mail-Adresse konnte nicht kopiert werden"
+  },
+  "modals": {
+    "customEmail": {
+      "title": "Benutzerdefinierte E-Mail Erstellen",
+      "username": "Wählen Sie Ihren E-Mail-Benutzernamen",
+      "placeholder": "meinname11",
+      "description": "Wählen Sie einen eindeutigen Benutzernamen für Ihre temporäre E-Mail",
+      "create": "Benutzerdefinierte E-Mail Erstellen",
+      "randomInstead": "Stattdessen Zufällig",
+      "creating": "Erstelle..."
+    },
+    "account": {
+      "title": "Kontoinformationen Bearbeiten",
+      "warning": "⚠️ Wichtig: Wenn Sie die E-Mails behalten möchten, die Sie erstellt haben, stellen Sie sicher, dass Sie Ihre Kontoinformationen speichern oder Details hinzufügen, an die Sie sich erinnern können. Ohne das Speichern Ihrer Anmeldedaten könnten Sie den Zugang zu Ihren temporären E-Mails verlieren.",
+      "username": "Benutzername",
+      "password": "Passwort",
+      "personalEmail": "Persönliche E-Mail (Optional)",
+      "personalEmailDesc": "Fügen Sie Ihre persönliche E-Mail zur Kontowiederherstellung hinzu",
+      "save": "Änderungen Speichern",
+      "cancel": "Abbrechen",
+      "saving": "Speichere...",
+      "updated": "Konto aktualisiert!",
+      "updateSuccess": "Ihre Kontoinformationen wurden gespeichert",
+      "updateError": "Konto konnte nicht aktualisiert werden"
+    }
+  },
+  "footer": {
+    "privacy": "Datenschutzrichtlinie",
+    "terms": "Nutzungsbedingungen",
+    "blog": "Blog",
+    "support": "Support",
+    "disclaimer": "E-Mail-Haftungsausschluss"
+  }
+}

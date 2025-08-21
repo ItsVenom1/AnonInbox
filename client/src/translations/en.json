@@ -1,0 +1,89 @@
+{
+  "nav": {
+    "language": "Language"
+  },
+  "home": {
+    "title": "Temporary Email Made Simple",
+    "subtitle": "The most advanced temporary email service. Create unlimited disposable email addresses instantly. 100% free, no registration required. Protect your inbox like a pro.",
+    "createEmail": "Create Free Email Now",
+    "accessAccount": "Access Existing Account",
+    "noRegistration": "No Registration Required",
+    "instantActivation": "Instant Activation",
+    "realTimeDelivery": "Real-time Message Delivery",
+    "features": {
+      "fast": {
+        "title": "Lightning Fast",
+        "description": "Create unlimited emails in under 3 seconds. No forms, no verification, no waiting."
+      },
+      "privacy": {
+        "title": "Privacy Protection", 
+        "description": "Military-grade privacy. Your real email stays completely hidden from spammers."
+      },
+      "real": {
+        "title": "Real Email System",
+        "description": "100% real email addresses that work with any service. Perfect for verifications."
+      }
+    },
+    "testimonials": {
+      "john": "I register on tons of websites daily for work and personal stuff. I never give my real email anymore because when sites get hacked or untrustworthy owners sell your data, you get flooded with spam. NordMail protects my personal email completely - it's a lifesaver!",
+      "sarah": "As a freelancer, I'm constantly signing up for new platforms and services. NordMail lets me test everything safely without worrying about my inbox getting destroyed by spam or my email being sold to marketers.",
+      "michael": "Online shopping and trying new apps used to mean giving away my email to everyone. Now I use NordMail for everything non-essential. My real inbox stays clean and I never worry about data breaches affecting me."
+    }
+  },
+  "dashboard": {
+    "myEmails": "My Emails",
+    "account": "Account",
+    "refresh": "Refresh",
+    "random": "Random",
+    "custom": "Custom",
+    "emails": "Emails",
+    "inbox": "Inbox", 
+    "message": "Message",
+    "noEmails": "No emails yet",
+    "noEmailsDesc": "Create your first temporary email address to get started",
+    "randomEmail": "Random Email",
+    "customEmail": "Custom Email",
+    "selectEmail": "Select an email to view messages",
+    "searchEmails": "Search emails...",
+    "copied": "Copied!",
+    "emailCopied": "Email address copied to clipboard",
+    "created": "Created",
+    "newEmailCreated": "New email created!",
+    "emailReady": "is ready to use",
+    "error": "Error",
+    "createError": "Failed to create email address. Please try again.",
+    "copyError": "Failed to copy email address"
+  },
+  "modals": {
+    "customEmail": {
+      "title": "Create Custom Email",
+      "username": "Choose your email username",
+      "placeholder": "myname11",
+      "description": "Choose a unique username for your temporary email",
+      "create": "Create Custom Email",
+      "randomInstead": "Random Instead",
+      "creating": "Creating..."
+    },
+    "account": {
+      "title": "Edit Account Information",
+      "warning": "⚠️ Important: If you want to keep the emails you created, make sure to save your account information or add details you can remember. Without saving your credentials, you may lose access to your temporary emails.",
+      "username": "Username",
+      "password": "Password", 
+      "personalEmail": "Personal Email (Optional)",
+      "personalEmailDesc": "Add your personal email for account recovery",
+      "save": "Save Changes",
+      "cancel": "Cancel",
+      "saving": "Saving...",
+      "updated": "Account updated!",
+      "updateSuccess": "Your account information has been saved",
+      "updateError": "Failed to update account"
+    }
+  },
+  "footer": {
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service", 
+    "blog": "Blog",
+    "support": "Support",
+    "disclaimer": "Email Disclaimer"
+  }
+}

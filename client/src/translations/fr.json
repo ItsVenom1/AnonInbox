@@ -1,0 +1,89 @@
+{
+  "nav": {
+    "language": "Langue"
+  },
+  "home": {
+    "title": "Email Temporaire Simplifié",
+    "subtitle": "Le service d'email temporaire le plus avancé. Créez des adresses email jetables illimitées instantanément. 100% gratuit, aucune inscription requise. Protégez votre boîte de réception comme un pro.",
+    "createEmail": "Créer un Email Gratuit Maintenant",
+    "accessAccount": "Accéder au Compte Existant",
+    "noRegistration": "Aucune Inscription Requise",
+    "instantActivation": "Activation Instantanée",
+    "realTimeDelivery": "Livraison de Messages en Temps Réel",
+    "features": {
+      "fast": {
+        "title": "Ultra Rapide",
+        "description": "Créez des emails illimités en moins de 3 secondes. Pas de formulaires, pas de vérification, pas d'attente."
+      },
+      "privacy": {
+        "title": "Protection de la Vie Privée",
+        "description": "Confidentialité de niveau militaire. Votre vrai email reste complètement caché des spammeurs."
+      },
+      "real": {
+        "title": "Système d'Email Réel",
+        "description": "Adresses email 100% réelles qui fonctionnent avec n'importe quel service. Parfait pour les vérifications."
+      }
+    },
+    "testimonials": {
+      "john": "Je m'inscris sur des tonnes de sites web quotidiennement pour le travail et les affaires personnelles. Je ne donne plus jamais mon vrai email parce que quand les sites sont piratés ou que des propriétaires peu fiables vendent vos données, vous êtes inondé de spam. NordMail protège complètement mon email personnel - c'est un sauveur!",
+      "sarah": "En tant que freelance, je m'inscris constamment sur de nouvelles plateformes et services. NordMail me permet de tout tester en sécurité sans m'inquiéter que ma boîte de réception soit détruite par le spam ou que mon email soit vendu aux marketers.",
+      "michael": "Les achats en ligne et tester de nouvelles apps signifiaient donner mon email à tout le monde. Maintenant j'utilise NordMail pour tout ce qui n'est pas essentiel. Ma vraie boîte reste propre et je ne m'inquiète jamais des violations de données qui m'affectent."
+    }
+  },
+  "dashboard": {
+    "myEmails": "Mes Emails",
+    "account": "Compte",
+    "refresh": "Actualiser",
+    "random": "Aléatoire",
+    "custom": "Personnalisé",
+    "emails": "Emails",
+    "inbox": "Boîte",
+    "message": "Message",
+    "noEmails": "Pas encore d'emails",
+    "noEmailsDesc": "Créez votre première adresse email temporaire pour commencer",
+    "randomEmail": "Email Aléatoire",
+    "customEmail": "Email Personnalisé",
+    "selectEmail": "Sélectionnez un email pour voir les messages",
+    "searchEmails": "Rechercher des emails...",
+    "copied": "Copié!",
+    "emailCopied": "Adresse email copiée dans le presse-papiers",
+    "created": "Créé",
+    "newEmailCreated": "Nouvel email créé!",
+    "emailReady": "est prêt à utiliser",
+    "error": "Erreur",
+    "createError": "Échec de la création de l'adresse email. Veuillez réessayer.",
+    "copyError": "Échec de la copie de l'adresse email"
+  },
+  "modals": {
+    "customEmail": {
+      "title": "Créer un Email Personnalisé",
+      "username": "Choisissez votre nom d'utilisateur email",
+      "placeholder": "monnom11",
+      "description": "Choisissez un nom d'utilisateur unique pour votre email temporaire",
+      "create": "Créer un Email Personnalisé",
+      "randomInstead": "Aléatoire À La Place",
+      "creating": "Création..."
+    },
+    "account": {
+      "title": "Modifier les Informations du Compte",
+      "warning": "⚠️ Important : Si vous voulez garder les emails que vous avez créés, assurez-vous de sauvegarder les informations de votre compte ou d'ajouter des détails dont vous pouvez vous souvenir. Sans sauvegarder vos identifiants, vous pourriez perdre l'accès à vos emails temporaires.",
+      "username": "Nom d'Utilisateur",
+      "password": "Mot de Passe",
+      "personalEmail": "Email Personnel (Optionnel)",
+      "personalEmailDesc": "Ajoutez votre email personnel pour la récupération de compte",
+      "save": "Sauvegarder les Modifications",
+      "cancel": "Annuler",
+      "saving": "Sauvegarde...",
+      "updated": "Compte mis à jour!",
+      "updateSuccess": "Vos informations de compte ont été sauvegardées",
+      "updateError": "Échec de la mise à jour du compte"
+    }
+  },
+  "footer": {
+    "privacy": "Politique de Confidentialité",
+    "terms": "Conditions d'Utilisation",
+    "blog": "Blog",
+    "support": "Support",
+    "disclaimer": "Clause de Non-responsabilité Email"
+  }
+}

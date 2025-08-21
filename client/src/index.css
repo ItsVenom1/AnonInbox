@@ -1,0 +1,140 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(0 0% 0%);
+  --foreground: hsl(0 0% 100%);
+  --card: hsl(210 10% 7%);
+  --card-foreground: hsl(0 0% 100%);
+  --popover: hsl(210 10% 7%);
+  --popover-foreground: hsl(0 0% 100%);
+  --primary: hsl(76 100% 56%);
+  --primary-foreground: hsl(0 0% 0%);
+  --secondary: hsl(210 10% 15%);
+  --secondary-foreground: hsl(0 0% 100%);
+  --muted: hsl(210 10% 15%);
+  --muted-foreground: hsl(210 5% 60%);
+  --accent: hsl(210 10% 15%);
+  --accent-foreground: hsl(76 100% 56%);
+  --destructive: hsl(0 84% 60%);
+  --destructive-foreground: hsl(0 0% 100%);
+  --border: hsl(210 10% 20%);
+  --input: hsl(210 10% 15%);
+  --ring: hsl(76 100% 56%);
+  --chart-1: hsl(76 100% 56%);
+  --chart-2: hsl(160 80% 40%);
+  --chart-3: hsl(30 80% 55%);
+  --chart-4: hsl(280 65% 60%);
+  --chart-5: hsl(340 75% 55%);
+  --sidebar: hsl(210 10% 7%);
+  --sidebar-foreground: hsl(0 0% 100%);
+  --sidebar-primary: hsl(76 100% 56%);
+  --sidebar-primary-foreground: hsl(0 0% 0%);
+  --sidebar-accent: hsl(210 10% 15%);
+  --sidebar-accent-foreground: hsl(76 100% 56%);
+  --sidebar-border: hsl(210 10% 20%);
+  --sidebar-ring: hsl(76 100% 56%);
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-serif: Georgia, serif;
+  --font-mono: ui-monospace, 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+  --radius: 0.75rem;
+  --nord-green: hsl(76 100% 56%);
+  --nord-dark: hsl(210 10% 7%);
+  --nord-darker: hsl(210 15% 4%);
+}
+
+.dark {
+  --background: hsl(0 0% 0%);
+  --foreground: hsl(0 0% 100%);
+  --card: hsl(210 10% 7%);
+  --card-foreground: hsl(0 0% 100%);
+  --popover: hsl(210 10% 7%);
+  --popover-foreground: hsl(0 0% 100%);
+  --primary: hsl(76 100% 56%);
+  --primary-foreground: hsl(0 0% 0%);
+  --secondary: hsl(210 10% 15%);
+  --secondary-foreground: hsl(0 0% 100%);
+  --muted: hsl(210 10% 15%);
+  --muted-foreground: hsl(210 5% 60%);
+  --accent: hsl(210 10% 15%);
+  --accent-foreground: hsl(76 100% 56%);
+  --destructive: hsl(0 84% 60%);
+  --destructive-foreground: hsl(0 0% 100%);
+  --border: hsl(210 10% 20%);
+  --input: hsl(210 10% 15%);
+  --ring: hsl(76 100% 56%);
+  --sidebar: hsl(210 10% 7%);
+  --sidebar-foreground: hsl(0 0% 100%);
+  --sidebar-primary: hsl(76 100% 56%);
+  --sidebar-primary-foreground: hsl(0 0% 0%);
+  --sidebar-accent: hsl(210 10% 15%);
+  --sidebar-accent-foreground: hsl(76 100% 56%);
+  --sidebar-border: hsl(210 10% 20%);
+  --sidebar-ring: hsl(76 100% 56%);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  .nord-green {
+    color: var(--nord-green);
+  }
+  
+  .bg-nord-green {
+    background-color: var(--nord-green);
+  }
+  
+  .bg-nord-dark {
+    background-color: var(--nord-dark);
+  }
+  
+  .bg-nord-darker {
+    background-color: var(--nord-darker);
+  }
+  
+  .border-nord-green {
+    border-color: var(--nord-green);
+  }
+  
+  .hover\:bg-nord-green\/90:hover {
+    background-color: hsl(76 100% 56% / 0.9);
+  }
+  
+  .hover\:bg-nord-green\/80:hover {
+    background-color: hsl(76 100% 56% / 0.8);
+  }
+  
+  .bg-nord-green\/10 {
+    background-color: hsl(76 100% 56% / 0.1);
+  }
+  
+  .bg-nord-green\/20 {
+    background-color: hsl(76 100% 56% / 0.2);
+  }
+  
+  .shadow-nord-green\/20 {
+    box-shadow: 0 25px 50px -12px hsl(76 100% 56% / 0.2);
+  }
+}
+
+@layer utilities {
+  .animate-pulse-slow {
+    animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+}

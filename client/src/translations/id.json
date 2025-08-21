@@ -1,0 +1,89 @@
+{
+  "nav": {
+    "language": "Bahasa"
+  },
+  "home": {
+    "title": "Email Sementara Disederhanakan",
+    "subtitle": "Layanan email sementara paling canggih. Buat alamat email sekali pakai tanpa batas secara instan. 100% gratis, tidak perlu registrasi. Lindungi kotak masuk Anda seperti seorang profesional.",
+    "createEmail": "Buat Email Gratis Sekarang",
+    "accessAccount": "Akses Akun yang Ada",
+    "noRegistration": "Tidak Perlu Registrasi",
+    "instantActivation": "Aktivasi Instan",
+    "realTimeDelivery": "Pengiriman Pesan Real-time",
+    "features": {
+      "fast": {
+        "title": "Secepat Kilat",
+        "description": "Buat email tanpa batas dalam waktu kurang dari 3 detik. Tanpa formulir, tanpa verifikasi, tanpa menunggu."
+      },
+      "privacy": {
+        "title": "Perlindungan Privasi",
+        "description": "Privasi tingkat militer. Email asli Anda tetap tersembunyi sepenuhnya dari spammer."
+      },
+      "real": {
+        "title": "Sistem Email Nyata",
+        "description": "Alamat email 100% nyata yang bekerja dengan layanan apapun. Sempurna untuk verifikasi."
+      }
+    },
+    "testimonials": {
+      "john": "Saya mendaftar di banyak situs web setiap hari untuk pekerjaan dan hal-hal pribadi. Saya tidak pernah lagi memberikan email asli saya karena ketika situs diretas atau pemilik yang tidak dapat dipercaya menjual data Anda, Anda akan dibanjiri spam. NordMail melindungi email pribadi saya sepenuhnya - ini penyelamat hidup!",
+      "sarah": "Sebagai freelancer, saya terus-menerus mendaftar di platform dan layanan baru. NordMail memungkinkan saya menguji semuanya dengan aman tanpa khawatir kotak masuk saya hancur oleh spam atau email saya dijual ke pemasar.",
+      "michael": "Belanja online dan mencoba aplikasi baru dulu berarti memberikan email saya kepada semua orang. Sekarang saya menggunakan NordMail untuk semua yang tidak penting. Kotak masuk asli saya tetap bersih dan saya tidak pernah khawatir tentang pelanggaran data yang mempengaruhi saya."
+    }
+  },
+  "dashboard": {
+    "myEmails": "Email Saya",
+    "account": "Akun",
+    "refresh": "Segarkan",
+    "random": "Acak",
+    "custom": "Kustom",
+    "emails": "Email",
+    "inbox": "Kotak Masuk",
+    "message": "Pesan",
+    "noEmails": "Belum ada email",
+    "noEmailsDesc": "Buat alamat email sementara pertama Anda untuk memulai",
+    "randomEmail": "Email Acak",
+    "customEmail": "Email Kustom",
+    "selectEmail": "Pilih email untuk melihat pesan",
+    "searchEmails": "Cari email...",
+    "copied": "Disalin!",
+    "emailCopied": "Alamat email disalin ke clipboard",
+    "created": "Dibuat",
+    "newEmailCreated": "Email baru dibuat!",
+    "emailReady": "siap digunakan",
+    "error": "Kesalahan",
+    "createError": "Gagal membuat alamat email. Silakan coba lagi.",
+    "copyError": "Gagal menyalin alamat email"
+  },
+  "modals": {
+    "customEmail": {
+      "title": "Buat Email Kustom",
+      "username": "Pilih nama pengguna email Anda",
+      "placeholder": "namasaya11",
+      "description": "Pilih nama pengguna unik untuk email sementara Anda",
+      "create": "Buat Email Kustom",
+      "randomInstead": "Acak Saja",
+      "creating": "Membuat..."
+    },
+    "account": {
+      "title": "Edit Informasi Akun",
+      "warning": "⚠️ Penting: Jika Anda ingin menyimpan email yang telah dibuat, pastikan untuk menyimpan informasi akun Anda atau menambahkan detail yang dapat Anda ingat. Tanpa menyimpan kredensial Anda, Anda mungkin kehilangan akses ke email sementara Anda.",
+      "username": "Nama Pengguna",
+      "password": "Kata Sandi",
+      "personalEmail": "Email Pribadi (Opsional)",
+      "personalEmailDesc": "Tambahkan email pribadi Anda untuk pemulihan akun",
+      "save": "Simpan Perubahan",
+      "cancel": "Batal",
+      "saving": "Menyimpan...",
+      "updated": "Akun diperbarui!",
+      "updateSuccess": "Informasi akun Anda telah disimpan",
+      "updateError": "Gagal memperbarui akun"
+    }
+  },
+  "footer": {
+    "privacy": "Kebijakan Privasi",
+    "terms": "Syarat Layanan",
+    "blog": "Blog",
+    "support": "Dukungan",
+    "disclaimer": "Penafian Email"
+  }
+}
