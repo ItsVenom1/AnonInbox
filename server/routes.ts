@@ -614,11 +614,18 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(401).json({ error: 'Authentication required' });
       }
 
-      const post = await storage.updateBlogPost(req.params.id, req.body);
+      // Validate the request body with partial schema for updates
+      const updateData = {
+        ...req.body,
+        tags: req.body.tags || [],
+        publishedAt: req.body.status === 'published' ? (req.body.publishedAt || new Date().toISOString()) : null
+      };
+
+      const post = await storage.updateBlogPost(req.params.id, updateData);
       res.json(post);
     } catch (error) {
       console.error('Error updating blog post:', error);
-      res.status(500).json({ error: 'Failed to update blog post' });
+      res.status(500).json({ error: 'Failed to update blog post', details: error instanceof Error ? error.message : 'Unknown error' });
     }
   });
 

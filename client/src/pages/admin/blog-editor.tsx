@@ -178,10 +178,22 @@ export default function BlogEditor() {
   };
 
   const handlePublish = () => {
-    setFormData(prev => ({ ...prev, status: 'published' }));
-    setTimeout(() => {
-      handleSubmit(new Event('submit') as any);
-    }, 100);
+    if (!formData.title || !formData.content) {
+      toast({
+        title: 'Missing Information',
+        description: 'Title and content are required',
+        variant: 'destructive',
+      });
+      return;
+    }
+    
+    const publishData = {
+      ...formData,
+      status: 'published',
+      publishedAt: new Date().toISOString()
+    };
+    
+    saveMutation.mutate(publishData);
   };
 
   if (isEdit && isLoading) {

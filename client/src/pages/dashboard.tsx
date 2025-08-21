@@ -144,6 +144,10 @@ export default function Dashboard() {
     if (selectedEmail) {
       queryClient.invalidateQueries({ queryKey: ["/api/email", selectedEmail.id, "messages"] });
     }
+    toast({
+      title: "Refreshing...",
+      description: "Checking for new messages",
+    });
   };
 
   const handleCustomEmailSubmit = (e: React.FormEvent) => {
@@ -252,7 +256,9 @@ export default function Dashboard() {
               onClick={handleRefresh}
               variant="ghost" 
               size="sm"
-              className="text-gray-400 hover:text-nord-green text-xs sm:text-sm flex-shrink-0"
+              disabled={!selectedEmail}
+              className="text-gray-400 hover:text-nord-green text-xs sm:text-sm flex-shrink-0 disabled:opacity-50"
+              data-testid="button-refresh-emails"
             >
               <RefreshCw className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />
               Refresh
