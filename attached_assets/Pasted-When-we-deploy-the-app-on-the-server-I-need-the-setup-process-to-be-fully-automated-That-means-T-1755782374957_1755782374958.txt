@@ -1,0 +1,73 @@
+When we deploy the app on the server, I need the setup process to be fully automated. That means:
+
+The database schema and initial data should be created automatically during installation or first run (migration/seeding system).
+
+No manual SQL setup — it should handle itself like production-ready Node.js apps.
+
+Data integrity and security must be guaranteed (transactions, proper indexing, no risk of data loss on restart).
+
+The app must come with a secure admin panel out of the box for managing content, users, and settings.
+
+Deployment should be as simple as running the app, not multiple manual steps.
+
+Backup Strategy for Production Apps
+
+Automated Backups
+
+Database backups should run daily (or more often if needed).
+
+Use database tools like:
+
+mysqldump / pg_dump (for MySQL/PostgreSQL)
+
+Built-in snapshot features if using cloud DB (AWS RDS, GCP Cloud SQL, etc.)
+
+Backups should be stored off-server (e.g., AWS S3, Google Cloud Storage, Backblaze, etc.), not only on the same machine.
+
+Incremental Backups for Large Data
+
+For big apps, they don’t just dump the whole DB daily — they keep incremental backups (only changes since the last backup). This saves space and speeds up restore.
+
+Encryption & Security
+
+Backup files should be encrypted before upload.
+
+Only the server/admin should have access keys to restore.
+
+Versioning & Retention Policy
+
+Keep multiple versions of backups (e.g., last 7 days daily, last 4 weeks weekly, last 12 months monthly).
+
+This way if corruption goes unnoticed for days, you can still restore from an older safe copy.
+
+Restore Process (Disaster Recovery)
+
+Restoring should be as simple as:
+
+Spin up a new server.
+
+Pull the latest code.
+
+Run migrations (if needed).
+
+Import the latest backup file.
+
+Big websites always test restores regularly — a backup is useless if you never tested restoring it.
+
+Application Data & Files
+
+Not just DB — also back up user-uploaded files (images, videos, documents).
+
+Usually done by syncing uploads folder to S3 or another cloud storage provider.
+
+👉 So when you talk to your dev, tell him you want:
+
+Automatic scheduled DB backups (daily + incremental).
+
+Secure offsite storage (S3 or equivalent).
+
+Easy restore scripts (so even if server dies, you can get everything back quickly).
+
+Periodic restore tests to confirm backups actually work.
+
+and option to delete the old backuo manualy 
