@@ -26,9 +26,9 @@ function Router() {
       <Route path="/:lang/terms" component={Terms} />
       <Route path="/disclaimer" component={Disclaimer} />
       <Route path="/:lang/disclaimer" component={Disclaimer} />
-      <Route path="/admin" component={AdminLogin} />
-      <Route path="/admin/login" component={AdminLogin} />
-      <Route path="/admin/dashboard" component={AdminDashboard} />
+      <Route path="/nordmail-admin" component={AdminLogin} />
+      <Route path="/nordmail-admin/login" component={AdminLogin} />
+      <Route path="/nordmail-admin/dashboard" component={AdminDashboard} />
       <Route component={NotFound} />
     </Switch>
   );

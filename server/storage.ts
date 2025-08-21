@@ -15,6 +15,14 @@ export interface IStorage {
   getMessageByMailTmId(messageId: string): Promise<Message | undefined>;
   markMessageAsSeen(id: string): Promise<void>;
   deleteMessage(id: string): Promise<void>;
+  // Admin methods
+  getTotalAccountsCount(): Promise<number>;
+  getTotalEmailsCount(): Promise<number>;
+  getTodayEmailsCount(): Promise<number>;
+  getTotalMessagesCount(): Promise<number>;
+  getRecentMessages(limit: number): Promise<Message[]>;
+  getRecentEmails(limit: number): Promise<EmailAddress[]>;
+  getRecentAccounts(limit: number): Promise<TempAccount[]>;
 }
 
 export class MemStorage implements IStorage {
@@ -132,6 +140,45 @@ export class MemStorage implements IStorage {
 
   async deleteMessage(id: string): Promise<void> {
     this.messages.delete(id);
+  }
+
+  // Admin methods
+  async getTotalAccountsCount(): Promise<number> {
+    return this.accounts.size;
+  }
+
+  async getTotalEmailsCount(): Promise<number> {
+    return this.emails.size;
+  }
+
+  async getTodayEmailsCount(): Promise<number> {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    return Array.from(this.emails.values())
+      .filter(email => email.createdAt >= today)
+      .length;
+  }
+
+  async getTotalMessagesCount(): Promise<number> {
+    return this.messages.size;
+  }
+
+  async getRecentMessages(limit: number): Promise<Message[]> {
+    return Array.from(this.messages.values())
+      .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
+      .slice(0, limit);
+  }
+
+  async getRecentEmails(limit: number): Promise<EmailAddress[]> {
+    return Array.from(this.emails.values())
+      .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
+      .slice(0, limit);
+  }
+
+  async getRecentAccounts(limit: number): Promise<TempAccount[]> {
+    return Array.from(this.accounts.values())
+      .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
+      .slice(0, limit);
   }
 }
 

@@ -44,7 +44,7 @@ export default function AdminDashboard() {
   useEffect(() => {
     const token = localStorage.getItem('admin_token');
     if (!token) {
-      navigate('/admin');
+      navigate('/nordmail-admin');
     }
   }, [navigate]);
 
@@ -97,7 +97,7 @@ export default function AdminDashboard() {
       title: 'Logged out',
       description: 'You have been securely logged out',
     });
-    navigate('/admin');
+    navigate('/nordmail-admin');
   };
 
   const stats = statsQuery.data;

@@ -77,14 +77,6 @@ export const Footer: React.FC = () => {
                   {t('footer.support')}
                 </Link>
               </li>
-              <li>
-                <a 
-                  href="/admin"
-                  className="text-gray-400 hover:text-nord-green transition-colors"
-                >
-                  Admin Portal
-                </a>
-              </li>
             </ul>
           </div>
         </div>

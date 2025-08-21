@@ -34,7 +34,7 @@ export default function AdminLogin() {
         title: 'Welcome back!',
         description: 'Successfully logged into admin dashboard',
       });
-      navigate('/admin/dashboard');
+      navigate('/nordmail-admin/dashboard');
     },
     onError: (error) => {
       toast({
