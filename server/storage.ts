@@ -36,6 +36,9 @@ export interface IStorage {
   getRecentMessages(limit: number): Promise<Message[]>;
   getRecentEmails(limit: number): Promise<EmailAddress[]>;
   getRecentAccounts(limit: number): Promise<TempAccount[]>;
+  getAllTempAccounts(): Promise<TempAccount[]>;
+  getAllEmailAddresses(): Promise<EmailAddress[]>;
+  getAllMessages(): Promise<Message[]>;
   
   // Blog Management
   createBlogPost(data: InsertBlogPost): Promise<BlogPost>;
@@ -219,6 +222,18 @@ export class MemStorage implements IStorage {
     return Array.from(this.accounts.values())
       .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
       .slice(0, limit);
+  }
+
+  async getAllTempAccounts(): Promise<TempAccount[]> {
+    return Array.from(this.accounts.values());
+  }
+
+  async getAllEmailAddresses(): Promise<EmailAddress[]> {
+    return Array.from(this.emails.values());
+  }
+
+  async getAllMessages(): Promise<Message[]> {
+    return Array.from(this.messages.values());
   }
 
   // Blog Management (Memory storage - will be replaced with DB)

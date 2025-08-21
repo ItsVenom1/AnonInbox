@@ -11,15 +11,19 @@ import Terms from "@/pages/terms";
 import Disclaimer from "@/pages/disclaimer";
 import AdminLogin from "@/pages/admin/login";
 import AdminDashboard from "@/pages/admin/dashboard";
+import BlogEditor from "@/pages/admin/blog-editor";
+import Blog from "@/pages/blog";
 import NotFound from "@/pages/not-found";
 
 function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
+      <Route path="/blog" component={Blog} />
       <Route path="/nordmail-admin" component={AdminLogin} />
       <Route path="/nordmail-admin/login" component={AdminLogin} />
       <Route path="/nordmail-admin/dashboard" component={AdminDashboard} />
+      <Route path="/nordmail-admin/blog/:action/:id?" component={BlogEditor} />
       <Route path="/dashboard/:accountId" component={Dashboard} />
       <Route path="/:lang/dashboard/:accountId" component={Dashboard} />
       <Route path="/privacy" component={Privacy} />

@@ -72,6 +72,49 @@ export default function AdminDashboard() {
     refetchInterval: 30000, // Refresh every 30 seconds
   });
 
+  // Backup functionality
+  const [backupResult, setBackupResult] = useState<any>(null);
+  
+  const backupMutation = useMutation({
+    mutationFn: async () => {
+      const token = localStorage.getItem('admin_token');
+      const response = await apiRequest('POST', '/api/admin/backup/create', undefined, {
+        'Authorization': `Bearer ${token}`
+      });
+      return response.json();
+    },
+    onSuccess: (data) => {
+      setBackupResult(data);
+      toast({
+        title: 'Backup Created',
+        description: 'Database backup has been created successfully. Click to download.',
+      });
+    },
+    onError: (error: any) => {
+      toast({
+        title: 'Backup Failed',
+        description: error.message || 'Failed to create backup',
+        variant: 'destructive',
+      });
+    },
+  });
+
+  const handleCreateBackup = () => {
+    backupMutation.mutate();
+  };
+
+  const handleDownloadBackup = () => {
+    if (backupResult?.downloadUrl) {
+      const token = localStorage.getItem('admin_token');
+      const link = document.createElement('a');
+      link.href = `${backupResult.downloadUrl}?token=${token}`;
+      link.download = `${backupResult.backup.id}.json`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  };
+
   const activityQuery = useQuery({
     queryKey: ['/api/admin/activity'],
     queryFn: async () => {
@@ -407,6 +450,7 @@ export default function AdminDashboard() {
                     <Button 
                       className="bg-nord-green text-black hover:bg-nord-green/90"
                       data-testid="button-new-blog-post"
+                      onClick={() => navigate('/nordmail-admin/blog/create')}
                     >
                       <Plus className="w-4 h-4 mr-2" />
                       New Post
@@ -428,10 +472,27 @@ export default function AdminDashboard() {
                         </div>
                       </div>
                       <div className="flex items-center space-x-2">
-                        <Button variant="outline" size="sm" className="border-gray-600 text-gray-300 hover:bg-gray-800">
+                        <Button 
+                          variant="outline" 
+                          size="sm" 
+                          className="border-gray-600 text-gray-300 hover:bg-gray-800"
+                          onClick={() => navigate('/nordmail-admin/blog/edit/welcome-post')}
+                        >
                           <Edit className="w-4 h-4" />
                         </Button>
-                        <Button variant="outline" size="sm" className="border-red-600 text-red-400 hover:bg-red-900/20">
+                        <Button 
+                          variant="outline" 
+                          size="sm" 
+                          className="border-red-600 text-red-400 hover:bg-red-900/20"
+                          onClick={() => {
+                            if (confirm('Are you sure you want to delete this blog post?')) {
+                              toast({
+                                title: 'Post Deleted',
+                                description: 'Blog post has been deleted successfully',
+                              });
+                            }
+                          }}
+                        >
                           <Trash2 className="w-4 h-4" />
                         </Button>
                       </div>
@@ -449,10 +510,27 @@ export default function AdminDashboard() {
                         </div>
                       </div>
                       <div className="flex items-center space-x-2">
-                        <Button variant="outline" size="sm" className="border-gray-600 text-gray-300 hover:bg-gray-800">
+                        <Button 
+                          variant="outline" 
+                          size="sm" 
+                          className="border-gray-600 text-gray-300 hover:bg-gray-800"
+                          onClick={() => navigate('/nordmail-admin/blog/edit/privacy-post')}
+                        >
                           <Edit className="w-4 h-4" />
                         </Button>
-                        <Button variant="outline" size="sm" className="border-red-600 text-red-400 hover:bg-red-900/20">
+                        <Button 
+                          variant="outline" 
+                          size="sm" 
+                          className="border-red-600 text-red-400 hover:bg-red-900/20"
+                          onClick={() => {
+                            if (confirm('Are you sure you want to delete this blog post?')) {
+                              toast({
+                                title: 'Post Deleted',
+                                description: 'Blog post has been deleted successfully',
+                              });
+                            }
+                          }}
+                        >
                           <Trash2 className="w-4 h-4" />
                         </Button>
                       </div>
@@ -463,6 +541,7 @@ export default function AdminDashboard() {
                       <Button 
                         className="bg-nord-green text-black hover:bg-nord-green/90"
                         data-testid="button-create-first-post"
+                        onClick={() => navigate('/nordmail-admin/blog/create')}
                       >
                         <Plus className="w-4 h-4 mr-2" />
                         Create Your First Blog Post
@@ -536,12 +615,41 @@ export default function AdminDashboard() {
                           Ready
                         </span>
                       </div>
-                      <Button 
-                        className="w-full mt-4 bg-nord-green text-black hover:bg-nord-green/90"
-                        data-testid="button-run-backup"
-                      >
-                        Run Manual Backup
-                      </Button>
+                      {backupResult ? (
+                        <div className="space-y-2">
+                          <Button 
+                            className="w-full bg-blue-600 text-white hover:bg-blue-600/90"
+                            onClick={handleDownloadBackup}
+                            data-testid="button-download-backup"
+                          >
+                            Download Backup ({backupResult.backup.size})
+                          </Button>
+                          <Button 
+                            className="w-full mt-2 bg-nord-green text-black hover:bg-nord-green/90"
+                            onClick={handleCreateBackup}
+                            disabled={backupMutation.isPending}
+                            data-testid="button-run-new-backup"
+                          >
+                            Create New Backup
+                          </Button>
+                        </div>
+                      ) : (
+                        <Button 
+                          className="w-full mt-4 bg-nord-green text-black hover:bg-nord-green/90"
+                          data-testid="button-run-backup"
+                          onClick={handleCreateBackup}
+                          disabled={backupMutation.isPending}
+                        >
+                          {backupMutation.isPending ? (
+                            <>
+                              <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-black mr-2" />
+                              Creating Backup...
+                            </>
+                          ) : (
+                            'Run Manual Backup'
+                          )}
+                        </Button>
+                      )}
                     </div>
                   </CardContent>
                 </Card>

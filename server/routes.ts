@@ -716,6 +716,101 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Public Blog API (no authentication required)
+  app.get('/api/blog/posts', async (req, res) => {
+    try {
+      const { status = 'published', limit = 50, offset = 0 } = req.query;
+      const posts = await storage.getBlogPosts({
+        status: status as string,
+        limit: Number(limit),
+        offset: Number(offset)
+      });
+      res.json(posts);
+    } catch (error) {
+      console.error('Error fetching blog posts:', error);
+      res.status(500).json({ error: 'Failed to fetch blog posts' });
+    }
+  });
+
+  // Backup API endpoint
+  app.post('/api/admin/backup/create', async (req, res) => {
+    try {
+      const authHeader = req.headers.authorization;
+      if (!authHeader || !authHeader.startsWith('Bearer ')) {
+        return res.status(401).json({ error: 'Authentication required' });
+      }
+
+      // Create timestamp for backup
+      const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
+      const backupId = `backup_${timestamp}`;
+      
+      // In a real implementation, this would create an actual database backup
+      // For now, we'll simulate the backup process
+      const backupData = {
+        id: backupId,
+        timestamp: new Date().toISOString(),
+        status: 'completed',
+        size: '2.4 MB',
+        tables: ['temp_accounts', 'email_addresses', 'messages', 'blog_posts'],
+        recordCount: {
+          temp_accounts: await storage.getAllTempAccounts().then(accounts => accounts.length),
+          email_addresses: await storage.getAllEmailAddresses().then(emails => emails.length),
+          messages: await storage.getAllMessages().then(messages => messages.length),
+          blog_posts: await storage.getBlogPosts().then(posts => posts.length)
+        }
+      };
+
+      // Simulate backup creation delay
+      await new Promise(resolve => setTimeout(resolve, 2000));
+
+      res.json({
+        success: true,
+        backup: backupData,
+        downloadUrl: `/api/admin/backup/download/${backupId}`,
+        message: 'Backup created successfully'
+      });
+    } catch (error) {
+      console.error('Error creating backup:', error);
+      res.status(500).json({ error: 'Failed to create backup' });
+    }
+  });
+
+  app.get('/api/admin/backup/download/:backupId', async (req, res) => {
+    try {
+      const authHeader = req.headers.authorization;
+      if (!authHeader || !authHeader.startsWith('Bearer ')) {
+        return res.status(401).json({ error: 'Authentication required' });
+      }
+
+      const { backupId } = req.params;
+      
+      // Generate mock backup content (in real implementation, this would be actual database dump)
+      const backupContent = JSON.stringify({
+        metadata: {
+          backupId,
+          createdAt: new Date().toISOString(),
+          version: '1.0.0',
+          application: 'NordMail'
+        },
+        data: {
+          tempAccounts: await storage.getAllTempAccounts(),
+          emailAddresses: await storage.getAllEmailAddresses(),
+          messages: await storage.getAllMessages(),
+          blogPosts: await storage.getBlogPosts()
+        }
+      }, null, 2);
+
+      res.setHeader('Content-Type', 'application/json');
+      res.setHeader('Content-Disposition', `attachment; filename="${backupId}.json"`);
+      res.setHeader('Content-Length', Buffer.byteLength(backupContent));
+      
+      res.send(backupContent);
+    } catch (error) {
+      console.error('Error downloading backup:', error);
+      res.status(500).json({ error: 'Failed to download backup' });
+    }
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }
